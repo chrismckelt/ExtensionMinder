@@ -1,10 +1,23 @@
 @echo Off
-set nuget=
-if "%nuget%" == "" (
-    set nuget=nuget
+set config=%1
+if "%config%" == "" (
+   set config=Release
+)
+ 
+set version=1.0.0
+if not "%PackageVersion%" == "" (
+   set version=%PackageVersion%
 )
 
-%WINDIR%\Microsoft.NET\Framework\v4.0.30319\msbuild ExtensionMinder.sln /p:Configuration="Release" /m /v:M /fl /flp:LogFile=msbuild.log;Verbosity=diag /nr:false /p:OutputPath=\\build\\lib\\net40\\
+set nuget=
+if "%nuget%" == "" (
+	set nuget=nuget
+)
 
-%nuget% pack extensionminder.nuspec"  -NoPackageAnalysis -OutputDirectory $buildArtifactsDirectory -verbosity detailed Configuration="Release"
+%WINDIR%\Microsoft.NET\Framework\v4.0.30319\msbuild ExtensionMinder.sln /p:Configuration="Release" /p:OutputPath=build /m /v:M /fl /flp:LogFile=msbuild.log;Verbosity=diag /nr:false
 
+mkdir Build
+mkdir Build\lib
+mkdir Build\lib\net40
+
+%nuget% pack "ExtensionMinder.nuspec" -NoPackageAnalysis -verbosity detailed -o Build -Version %version% -p Configuration="Release"
