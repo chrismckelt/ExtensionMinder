@@ -5,7 +5,8 @@ using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Xml;
-using Newtonsoft.Json;
+using System.Xml.Linq;
+using System.Xml.Serialization;
 
 namespace ExtensionMinder
 {
@@ -39,7 +40,15 @@ namespace ExtensionMinder
 
         public static string Serialize(this object obj)
         {
-            return JsonConvert.SerializeObject(obj);
+            XmlSerializer xmlSerializer = new XmlSerializer(obj.GetType());
+
+            StringWriter stringWriter = new StringWriter();
+            XmlTextWriter xmlWriter = new XmlTextWriter(stringWriter);
+
+            xmlWriter.Formatting = Formatting.Indented;
+            xmlSerializer.Serialize(xmlWriter, obj);
+
+            return stringWriter.ToString(); 
         }
 
         public static string SerializeWithDataContractSerializer(this object obj)
@@ -94,13 +103,21 @@ namespace ExtensionMinder
 
         }
 
-        public static T Deserialize<T>(this string item)
+        public static void SerializeTo<T>(this T o, Stream stream)
         {
-            if (string.IsNullOrWhiteSpace(item))
-                return default(T);
-
-            return JsonConvert.DeserializeObject<T>(item);
+            new BinaryFormatter().Serialize(stream, o);  // serialize o not typeof(T)
         }
 
+        public static T Deserialize<T>(this Stream stream)
+        {
+            return (T)new BinaryFormatter().Deserialize(stream);
+        }
+
+        public static T Deserialize<T>(this XDocument xmlDocument)
+        {
+            XmlSerializer xmlSerializer = new XmlSerializer(typeof(T));
+            using (XmlReader reader = xmlDocument.CreateReader())
+                return (T)xmlSerializer.Deserialize(reader);
+        }
     }
 }
