@@ -16,6 +16,6 @@
     <tags>Extensions, Extension Methods</tags>
   </metadata>
   <files>
-	<file src="bin\$configuration$\ExtensionMinder.dll" target="lib\net40\" />
+	<file src="bin\release\ExtensionMinder.dll" target="lib\net40\" />
   </files>
 </package>

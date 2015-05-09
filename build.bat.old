@@ -1,5 +1,5 @@
 @echo Off
-set config=%1
+set config="Release"
 if "%config%" == "" (
    set config=Release
 )
@@ -14,7 +14,7 @@ if "%nuget%" == "" (
 	set nuget=nuget
 )
 
-%WINDIR%\Microsoft.NET\Framework\v4.0.30319\msbuild ExtensionMinder.sln /p:Configuration="%config%" /m /v:M /fl /flp:LogFile=msbuild.log;Verbosity=diag /nr:false
+%WINDIR%\Microsoft.NET\Framework\v4.0.30319\msbuild ExtensionMinder.sln /p:Configuration="Release" /m /v:M /fl /flp:LogFile=msbuild.log;Verbosity=diag /nr:false /p:OutputPath=\\build\\lib\\net40\\
 
 mkdir Build
 mkdir Build\lib
