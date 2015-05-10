@@ -18,6 +18,6 @@ if "%nuget%" == "" (
 
 mkdir Build
 mkdir Build\lib
-%nuget% pack "ExtensionMinder.nuspec" -NoPackageAnalysis -verbosity detailed -o Build -Version %version% -p Configuration="Release"
+%nuget% pack "ExtensionMinder.nuspec" -NoPackageAnalysis -verbosity detailed -o Build -Version 1.0.2.0 -p Configuration="Release"
 
 pause
