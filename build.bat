@@ -17,4 +17,9 @@ if "%nuget%" == "" (
 %WINDIR%\Microsoft.NET\Framework\v4.0.30319\msbuild ExtensionMinder.sln /p:Configuration="Release" /p:OutputPath=build /m /v:M /fl /flp:LogFile=msbuild.log;Verbosity=diag /nr:false
 
 mkdir Build
+mkdir Build\lib
+mkdir Build\lib\net40
+
 %nuget% pack "ExtensionMinder.nuspec" -NoPackageAnalysis -verbosity detailed -o Build -Version %version% -p Configuration="Release"
+
+pause
