@@ -16,6 +16,6 @@
     <tags>Extensions, Extension Methods</tags>
   </metadata>
   <files>
-	<file src="ExtensionMinder.dll" />
+	<file src="build\ExtensionMinder.dll" />
   </files>
 </package>
