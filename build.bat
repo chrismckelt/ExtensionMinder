@@ -18,8 +18,6 @@ if "%nuget%" == "" (
 
 mkdir Build
 mkdir Build\lib
-mkdir Build\lib\net40
-
 %nuget% pack "ExtensionMinder.nuspec" -NoPackageAnalysis -verbosity detailed -o Build -Version %version% -p Configuration="Release"
 
 pause
