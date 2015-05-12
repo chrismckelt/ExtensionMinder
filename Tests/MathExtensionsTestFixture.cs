@@ -1,8 +1,7 @@
-﻿using Phoenix.Core.Libraries.Extensions;
-using Should;
-using Xunit;
+﻿using Xunit;
+using XunitShould;
 
-namespace Phoenix.Core.UnitTests.Libraries.Extensions
+namespace ExtensionMinder.Tests
 {
     public class MathExtensionsTestFixture
     {

@@ -68,5 +68,26 @@ namespace ExtensionMinder
             }
             return t1;
         }
+
+        public static int CalculateAge(this DateTime dob)
+        {
+            return dob.CalculateAge(DateTime.Today);
+        }
+
+        public static int CalculateAge(this DateTime dob, DateTime atDate)
+        {
+            //Get difference in years
+            var years = atDate.Date.Year - dob.Year;
+
+            // subtract another year if we're before the
+            // birth day in the current year
+            if (atDate.Date.Month < dob.Month || (atDate.Date.Month == dob.Month && atDate.Date.Day < dob.Day))
+            {
+                --years;
+            }
+
+            return years;
+        }
+
     }
 }

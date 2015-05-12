@@ -1,9 +1,8 @@
 ﻿using System;
-using Phoenix.Core.Libraries.Extensions;
 using Xunit;
-using Should;
+using XunitShould;
 
-namespace Phoenix.Core.UnitTests.Libraries.Extensions
+namespace ExtensionMinder.Tests
 {
     public class DateTimeExtensionsTestFixture
     {
@@ -82,6 +81,22 @@ namespace Phoenix.Core.UnitTests.Libraries.Extensions
             var endOfDay = new DateTime(2010, 10, 10, 23, 59, 59);
             var result = date.EndOfDay();
             result.ShouldEqual(endOfDay);
+        }
+
+        [Fact]
+        public void CalculateAgeCalculatesAgeCorrectlyWithDobLaterInYear()
+        {
+            var dob = DateTime.Now.AddDays(1).AddYears(-10);
+            var age = dob.CalculateAge();
+            age.ShouldEqual(9);
+        }
+
+        [Fact]
+        public void CalculateAgeCalculatesAgeCorrectlyWithDobEarlierInYear()
+        {
+            var dob = DateTime.Now.AddDays(-1).AddYears(-10);
+            var age = dob.CalculateAge();
+            age.ShouldEqual(10);
         }
     }
 }
