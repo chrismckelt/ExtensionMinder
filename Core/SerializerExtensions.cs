@@ -12,9 +12,29 @@ namespace ExtensionMinder
 {
     public static class SerializerExtensions
     {
+        private static readonly XmlSerializerNamespaces Namespaces =
+            new XmlSerializerNamespaces(new[] {new XmlQualifiedName("", "")});
+
+        public static string Serialize(object obj)
+        {
+            var serializer = new XmlSerializer(obj.GetType());
+            var xw = new StringWriter();
+            serializer.Serialize(xw, obj, Namespaces);
+            return xw.ToString();
+        }
+
+        public static T Deserialize<T>(string xml)
+        {
+            var serializer = new XmlSerializer(typeof(T));
+            using (var reader = new StringReader(xml))
+            {
+                return (T)serializer.Deserialize(reader);
+            }
+        }
+
         public static string SerializeToBinary<T>(this T source)
         {
-            if (!typeof(T).IsSerializable)
+            if (!typeof (T).IsSerializable)
             {
                 throw new ArgumentException("The type must be serializable.", "source");
             }
@@ -30,25 +50,12 @@ namespace ExtensionMinder
 
         public static T DeserializeFromBinary<T>(this string str)
         {
-            byte[] bytes = Convert.FromBase64String(str);
+            var bytes = Convert.FromBase64String(str);
 
             using (var stream = new MemoryStream(bytes))
             {
-                return (T)new BinaryFormatter().Deserialize(stream);
+                return (T) new BinaryFormatter().Deserialize(stream);
             }
-        }
-
-        public static string Serialize(this object obj)
-        {
-            XmlSerializer xmlSerializer = new XmlSerializer(obj.GetType());
-
-            StringWriter stringWriter = new StringWriter();
-            XmlTextWriter xmlWriter = new XmlTextWriter(stringWriter);
-
-            xmlWriter.Formatting = Formatting.Indented;
-            xmlSerializer.Serialize(xmlWriter, obj);
-
-            return stringWriter.ToString(); 
         }
 
         public static string SerializeWithDataContractSerializer(this object obj)
@@ -61,7 +68,6 @@ namespace ExtensionMinder
                 xWriter.Flush();
                 return serialXml.ToString();
             }
-
         }
 
         public static string SerializeWithDataContractSerializer(this object obj, IList<Type> knownTypes)
@@ -74,12 +80,11 @@ namespace ExtensionMinder
                 xWriter.Flush();
                 return serialXml.ToString();
             }
-
         }
 
         public static T Deserialize<T>(this XmlDocument xmlDocument)
         {
-            var ser = new DataContractSerializer(typeof(T));
+            var ser = new DataContractSerializer(typeof (T));
             using (var stringWriter = new StringWriter())
             using (var xmlWriter = new XmlTextWriter(stringWriter))
             {
@@ -89,35 +94,32 @@ namespace ExtensionMinder
                     Position = 0
                 };
                 var reader = XmlDictionaryReader.CreateTextReader(stream, new XmlDictionaryReaderQuotas());
-                return (T)ser.ReadObject(reader, true);
+                return (T) ser.ReadObject(reader, true);
             }
         }
 
-
         public static T Deserialize<T>(this byte[] buffer)
         {
-
             var formatter = new BinaryFormatter();
             var ms = new MemoryStream(buffer);
-            return (T)formatter.Deserialize(ms);
-
+            return (T) formatter.Deserialize(ms);
         }
 
         public static void SerializeTo<T>(this T o, Stream stream)
         {
-            new BinaryFormatter().Serialize(stream, o);  // serialize o not typeof(T)
+            new BinaryFormatter().Serialize(stream, o); 
         }
 
         public static T Deserialize<T>(this Stream stream)
         {
-            return (T)new BinaryFormatter().Deserialize(stream);
+            return (T) new BinaryFormatter().Deserialize(stream);
         }
 
         public static T Deserialize<T>(this XDocument xmlDocument)
         {
-            XmlSerializer xmlSerializer = new XmlSerializer(typeof(T));
-            using (XmlReader reader = xmlDocument.CreateReader())
-                return (T)xmlSerializer.Deserialize(reader);
+            var xmlSerializer = new XmlSerializer(typeof (T));
+            using (var reader = xmlDocument.CreateReader())
+                return (T) xmlSerializer.Deserialize(reader);
         }
     }
 }
