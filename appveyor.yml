@@ -9,14 +9,15 @@ init:
   - tzutil /s "W. Australia Standard Time"
 configuration: Release
 clone_folder: c:\projects\ExtensionMinder
-# before_build:
-#   - dotnet restore
+before_build:
+  - dotnet restore
 build:
   project: ExtensionMinder.sln
-  publish_nuget: true
-  publish_nuget_symbols: true
-  include_nuget_references: true
+  parallel: true
   verbosity: minimal
+  publish_nuget: true
+cache:
+  - packages -> **\packages.config
 artifacts:
 - path: extensionminder.nuspec
   name: extensionminder
@@ -25,4 +26,6 @@ deploy:
   server: https://nugetserver.com/nuget/feed
   api_key:
     secure: rlvBKgUdqBrIgLW8GJeI74rV/W20v/KaMeQawgKLsU1hdJAqo9vEoOWnxfd9Amru
-  artifact: ExtensionMinder
+  skip_symbols: false
+  symbol_server:           # remove to push symbols to SymbolSource.org
+  artifact: /.*\.nupkg/
