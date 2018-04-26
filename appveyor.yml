@@ -18,6 +18,9 @@ build:
   publish_nuget_symbols: true
   include_nuget_references: true
   verbosity: minimal
+artifacts:
+  - path: '*.nupkg'
+    name: ExtensionMinder
 deploy:
 - provider: NuGet
   server: https://nugetserver.com/nuget/feed
