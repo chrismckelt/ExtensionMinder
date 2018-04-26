@@ -9,8 +9,8 @@ init:
   - tzutil /s "W. Australia Standard Time"
 configuration: Release
 clone_folder: c:\projects\ExtensionMinder
-before_build:
-  - dotnet restore
+# before_build:
+#   - dotnet restore
 build:
   project: ExtensionMinder.sln
   publish_nuget: true
