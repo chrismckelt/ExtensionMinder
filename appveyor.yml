@@ -9,6 +9,12 @@ branches:
 init:
   - tzutil /s "W. Australia Standard Time"
 clone_folder: c:\projects\ExtensionMinder
+assembly_info:
+  patch: true
+  file: '**\AssemblyInfo.*'
+  assembly_version: '{version}'
+  assembly_file_version: '{version}'
+  assembly_informational_version: '{version}'
 before_build:
   - dotnet restore
 build:
@@ -16,10 +22,12 @@ build:
   parallel: false
   verbosity: normal
   publish_nuget: true
+after_build:
+  - nuget pack "%CLONE_PATH%\ExtensionMinder\ExtensionMinder.csproj" -Properties "Configuration=%CONFIGURATION%;Platform=AnyCPU" -IncludeReferencedProjects
 cache:
   - packages -> **\packages.config
 artifacts:
-- path: extensionminder\release\netstandard2.0\ExtensionMinder.dll
+- path: '*.nupkg'
   name: extensionminder
 deploy:
 - provider: NuGet
