@@ -1,0 +1,23 @@
+version: 2.0.{build}
+pull_requests:
+  do_not_increment_build_number: true
+branches:
+  only:
+  - master
+image: Visual Studio 2017
+init:
+  - tzutil /s "W. Australia Standard Time"
+configuration: Release
+shallow_clone: true
+clone_folder: c:\projects\ExtensionMinder
+build:
+  project: ExtensionMinder.sln
+  publish_nuget: true
+  publish_nuget_symbols: true
+  include_nuget_references: true
+  verbosity: minimal
+deploy:
+- provider: NuGet
+  server: https://nugetserver.com/nuget/feed
+  api_key:
+    secure: rlvBKgUdqBrIgLW8GJeI74rV/W20v/KaMeQawgKLsU1hdJAqo9vEoOWnxfd9Amru
