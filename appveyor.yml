@@ -24,5 +24,5 @@ artifacts:
 deploy:
 - provider: NuGet
   api_key:
-    secure: rlvBKgUdqBrIgLW8GJeI74rV/W20v/KaMeQawgKLsU1hdJAqo9vEoOWnxfd9Amru
+    secure: oy2nnqpnsaf5no7hromagahkluvyycie3exett6cgxm3py
   artifact: ExtensionMinder
