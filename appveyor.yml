@@ -23,7 +23,6 @@ artifacts:
   name: extensionminder
 deploy:
 - provider: NuGet
-  server: https://nugetserver.com/nuget/feed
   api_key:
     secure: rlvBKgUdqBrIgLW8GJeI74rV/W20v/KaMeQawgKLsU1hdJAqo9vEoOWnxfd9Amru
   skip_symbols: false
