@@ -1,6 +1,6 @@
 ﻿using System;
+using Should;
 using Xunit;
-using XunitShould;
 
 namespace ExtensionMinder.Tests
 {

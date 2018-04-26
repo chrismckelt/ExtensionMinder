@@ -1,5 +1,5 @@
-﻿using Xunit;
-using XunitShould;
+﻿using Should;
+using Xunit;
 
 namespace ExtensionMinder.Tests
 {

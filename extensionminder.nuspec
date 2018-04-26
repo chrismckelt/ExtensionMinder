@@ -11,9 +11,9 @@
     <iconUrl>https://raw.githubusercontent.com/chrismckelt/ExtensionMinder/master/icon.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>A collection of extension methods gathered over the years. Organised by category - (Collection,DateTime,Enum,Exception,File,Math,Reflection,Serializer,Spelling,Stream,String)</description>
-    <releaseNotes></releaseNotes>
+    <releaseNotes>.net core upgrade</releaseNotes>
     <copyright>Copyright &#x00A9; McKelt Solutions</copyright>
-    <tags>Extensions, Extension Methods</tags>
+    <tags>Extension,Extensions, Extension Methods</tags>
   </metadata>
   <files>
 	<file src="core\obj\release\ExtensionMinder.dll" target="..\build" />
