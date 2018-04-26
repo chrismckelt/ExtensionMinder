@@ -26,3 +26,4 @@ deploy:
   server: https://nugetserver.com/nuget/feed
   api_key:
     secure: rlvBKgUdqBrIgLW8GJeI74rV/W20v/KaMeQawgKLsU1hdJAqo9vEoOWnxfd9Amru
+  artifact: ExtensionMinder
