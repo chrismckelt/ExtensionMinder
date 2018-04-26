@@ -19,7 +19,7 @@ build:
   include_nuget_references: true
   verbosity: minimal
 artifacts:
-  - path: '*.nupkg'
+  - path: extensionminder.nuspec
     name: ExtensionMinder
 deploy:
 - provider: NuGet
