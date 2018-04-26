@@ -28,4 +28,4 @@ deploy:
     secure: rlvBKgUdqBrIgLW8GJeI74rV/W20v/KaMeQawgKLsU1hdJAqo9vEoOWnxfd9Amru
   skip_symbols: false
   symbol_server:           # remove to push symbols to SymbolSource.org
-  artifact: /.*\.nupkg/
+  artifact: extensionminder
