@@ -23,7 +23,7 @@ build:
   verbosity: normal
   publish_nuget: true
 after_build:
-  - dotnet pack "c:\projects\ExtensionMinder\ExtensionMinder\ExtensionMinder.csproj" -Properties "Configuration=%CONFIGURATION%;Platform=AnyCPU" -IncludeReferencedProjects
+  - dotnet pack "c:\projects\ExtensionMinder\ExtensionMinder\ExtensionMinder.csproj" -IncludeReferencedProjects
 cache:
   - packages -> **\packages.config
 artifacts:
