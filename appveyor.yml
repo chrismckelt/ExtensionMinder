@@ -17,16 +17,14 @@ build:
   verbosity: normal
   publish_nuget: true
 after_build:
-  - dotnet pack "c:\projects\ExtensionMinder\ExtensionMinder\ExtensionMinder.csproj" --configuration Release --no-build --output output
+  - cmd: dotnet pack "c:\projects\ExtensionMinder\ExtensionMinder\ExtensionMinder.csproj" --include-symbols --configuration %CONFIGURATION% --no-build --output ..\..\nupkgs /p:PackageVersion=%APPVEYOR_BUILD_VERSION%
 cache:
   - packages -> **\packages.config
 artifacts:
-- path: './output'
-  name: extensionminder
+  - path: nupkgs\*.nupkg
 deploy:
 - provider: NuGet
   api_key:
     secure: YxZTLAgoxyNdCF2wqeGHQnRrWdNy3ZpwoVtN6Oe4E7U16sXFPNvn77ZsRnUEBzzG
   skip_symbols: false
   symbol_server:           # remove to push symbols to SymbolSource.org
-  artifact: extensionminder
