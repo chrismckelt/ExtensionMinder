@@ -16,6 +16,6 @@
     <tags>Extension,Extensions, Extension Methods</tags>
   </metadata>
   <files>
-	<file src="extensionminder\obj\release\ExtensionMinder.dll" target="..\build" />
+	<file src="ExtensionMinder\bin\Release\netstandard2.0\ExtensionMinder.dll" target="..\build" />
   </files>
 </package>
