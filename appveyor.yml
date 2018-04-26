@@ -26,5 +26,5 @@ deploy:
   api_key:
     secure: YxZTLAgoxyNdCF2wqeGHQnRrWdNy3ZpwoVtN6Oe4E7U16sXFPNvn77ZsRnUEBzzG
   skip_symbols: false
-  artifact: packages
+  artifacts: packages
   
