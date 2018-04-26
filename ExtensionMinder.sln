@@ -1,12 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.2037
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{A7C20745-BE7F-49E4-BEFA-617D2B443F6A}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", "{7429334C-4F69-480C-AA52-E27DBF89A84D}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{3F7D9060-3307-4C48-A8EA-C2493C6F7645}"
 	ProjectSection(SolutionItems) = preProject
 		.nuget\NuGet.Config = .nuget\NuGet.Config
@@ -14,22 +10,29 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{3F7D90
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExtensionMinder", "ExtensionMinder\ExtensionMinder.csproj", "{64617FEC-D2DE-4090-A8B9-17E8A3DB5D13}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExtensionMinder.Tests", "ExtensionMinder.Tests\ExtensionMinder.Tests.csproj", "{0D51B8C7-C470-4737-B245-F64EE4913CBF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{A7C20745-BE7F-49E4-BEFA-617D2B443F6A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A7C20745-BE7F-49E4-BEFA-617D2B443F6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A7C20745-BE7F-49E4-BEFA-617D2B443F6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A7C20745-BE7F-49E4-BEFA-617D2B443F6A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7429334C-4F69-480C-AA52-E27DBF89A84D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7429334C-4F69-480C-AA52-E27DBF89A84D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7429334C-4F69-480C-AA52-E27DBF89A84D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7429334C-4F69-480C-AA52-E27DBF89A84D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{64617FEC-D2DE-4090-A8B9-17E8A3DB5D13}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{64617FEC-D2DE-4090-A8B9-17E8A3DB5D13}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{64617FEC-D2DE-4090-A8B9-17E8A3DB5D13}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{64617FEC-D2DE-4090-A8B9-17E8A3DB5D13}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0D51B8C7-C470-4737-B245-F64EE4913CBF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D51B8C7-C470-4737-B245-F64EE4913CBF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D51B8C7-C470-4737-B245-F64EE4913CBF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D51B8C7-C470-4737-B245-F64EE4913CBF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {06EB7FFD-8CC9-48A2-ADB8-30570DC12B70}
 	EndGlobalSection
 EndGlobal
