@@ -26,5 +26,6 @@ deploy:
   api_key:
     secure: YxZTLAgoxyNdCF2wqeGHQnRrWdNy3ZpwoVtN6Oe4E7U16sXFPNvn77ZsRnUEBzzG
   skip_symbols: false
-  artifacts: packages
+  symbol_server:           # remove to push symbols to SymbolSource.org
+  artifact: /.*\.nupkg/
   
