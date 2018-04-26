@@ -17,11 +17,11 @@ build:
   verbosity: normal
   publish_nuget: true
 after_build:
-  - dotnet pack "c:\projects\ExtensionMinder\ExtensionMinder\ExtensionMinder.csproj" --configuration Release
+  - dotnet pack "c:\projects\ExtensionMinder\ExtensionMinder\ExtensionMinder.csproj" --configuration Release --no-build --output output
 cache:
   - packages -> **\packages.config
 artifacts:
-- path: '*.nupkg'
+- path: './output'
   name: extensionminder
 deploy:
 - provider: NuGet
