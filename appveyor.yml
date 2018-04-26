@@ -8,7 +8,6 @@ image: Visual Studio 2017
 init:
   - tzutil /s "W. Australia Standard Time"
 configuration: Release
-shallow_clone: true
 clone_folder: c:\projects\ExtensionMinder
 before_build:
   - dotnet restore
@@ -19,10 +18,11 @@ build:
   include_nuget_references: true
   verbosity: minimal
 artifacts:
-  - path: extensionminder.nuspec
-    name: ExtensionMinder
+- path: extensionminder.nuspec
+  name: extensionminder
 deploy:
 - provider: NuGet
+  server: https://nugetserver.com/nuget/feed
   api_key:
-    secure: oy2nnqpnsaf5no7hromagahkluvyycie3exett6cgxm3py
+    secure: rlvBKgUdqBrIgLW8GJeI74rV/W20v/KaMeQawgKLsU1hdJAqo9vEoOWnxfd9Amru
   artifact: ExtensionMinder
