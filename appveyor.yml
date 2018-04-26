@@ -11,7 +11,7 @@ configuration: Release
 shallow_clone: true
 clone_folder: c:\projects\ExtensionMinder
 before_build:
-  - dontnet restore
+  - dotnet restore
 build:
   project: ExtensionMinder.sln
   publish_nuget: true
