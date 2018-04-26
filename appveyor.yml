@@ -9,12 +9,6 @@ branches:
 init:
   - tzutil /s "W. Australia Standard Time"
 clone_folder: c:\projects\ExtensionMinder
-assembly_info:
-  patch: true
-  file: '**\AssemblyInfo.*'
-  assembly_version: '{version}'
-  assembly_file_version: '{version}'
-  assembly_informational_version: '{version}'
 before_build:
   - dotnet restore
 build:
@@ -23,7 +17,7 @@ build:
   verbosity: normal
   publish_nuget: true
 after_build:
-  - dotnet pack "c:\projects\ExtensionMinder\ExtensionMinder\ExtensionMinder.csproj" --output nupkgs
+  - dotnet pack "c:\projects\ExtensionMinder\ExtensionMinder\ExtensionMinder.csproj" --configuration Release
 cache:
   - packages -> **\packages.config
 artifacts:
