@@ -3,7 +3,7 @@ using Xunit;
 
 namespace ExtensionMinder.Tests
 {
-    public class MathExtensionsTestFixture
+    public class MathExtensionsShould
     {
         [Fact]
         public void MultiplyBy100ShouldSetCorrectValue()

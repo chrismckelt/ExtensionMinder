@@ -3,7 +3,7 @@ using Xunit;
 
 namespace ExtensionMinder.Tests
 {
-    public class EnumExtensionsTestFixture
+    public class EnumExtensionsShould
     {
         [Fact]
         public void GetDescription_ReturnsCorrectDescription()

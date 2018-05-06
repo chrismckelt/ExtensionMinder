@@ -7,7 +7,7 @@ using Assert = Xunit.Assert;
 
 namespace ExtensionMinder.Tests
 {
-    public class CollectionExtensionsFixture
+    public class CollectionExtensionsShould
     {
         [Fact]
         public void EachWillPerformAction()

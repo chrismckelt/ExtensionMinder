@@ -5,7 +5,7 @@ using Xunit;
 
 namespace ExtensionMinder.Tests
 {
-    public class ExtensionsTestFixture
+    public class ExtensionsShould
     {
         [Fact]
         public void TrimToLengthShouldCutStringToSpecfiedLength()

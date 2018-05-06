@@ -2,7 +2,7 @@
 
 namespace ExtensionMinder.Tests
 {
-    public class StringExtensionTests
+    public class StringExtensionsShould
     {
       [Fact]
       public void TrimAllStrings_trims_all_strings()

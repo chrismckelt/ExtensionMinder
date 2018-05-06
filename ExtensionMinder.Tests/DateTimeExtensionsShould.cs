@@ -4,7 +4,7 @@ using Xunit;
 
 namespace ExtensionMinder.Tests
 {
-    public class DateTimeExtensionsTestFixture
+    public class DateTimeExtensionsShould
     {
         [Fact]
         public void DateTimeIsBetweenReturnsTrueForValidCase()
