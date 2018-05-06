@@ -1,16 +1,17 @@
-﻿using Should;
+﻿
+using FluentAssertions;
 using Xunit;
 
 namespace ExtensionMinder.Tests
 {
-    public class MathExtensionsTestFixture
+    public class MathExtensionsShould
     {
         [Fact]
         public void MultiplyBy100ShouldSetCorrectValue()
         {
             decimal x = 10;
             decimal y = x.MultiplyBy(100);
-            y.ShouldEqual(1000);
+            y.Should().Be(1000);
         }
 
         [Fact]
@@ -18,7 +19,7 @@ namespace ExtensionMinder.Tests
         {
             decimal x = 1000;
             decimal y = x.DivideBy(100);
-            y.ShouldEqual(10);
+            y.Should().Be(10);
         }
 
         [Fact]
@@ -26,7 +27,7 @@ namespace ExtensionMinder.Tests
         {
             var value = 123.3333333M;
             var result = value.RoundUp(2);
-            result.ShouldEqual(123.34M);
+            result.Should().Be(123.34M);
         }
 
         [Fact]
@@ -34,7 +35,7 @@ namespace ExtensionMinder.Tests
         {
             var value = 123.3333333;
             var result = value.RoundUp(2);
-            result.ShouldEqual(123.34);
+            result.Should().Be(123.34);
         }
 
         [Fact]
@@ -42,7 +43,7 @@ namespace ExtensionMinder.Tests
         {
             var value = 123.000001M;
             var result = value.RoundUp(2);
-            result.ShouldEqual(123.01M);
+            result.Should().Be(123.01M);
         }
 
         [Fact]
@@ -50,7 +51,7 @@ namespace ExtensionMinder.Tests
         {
             var value = 123.000001;
             var result = value.RoundUp(2);
-            result.ShouldEqual(123.01);
+            result.Should().Be(123.01);
         }
 
         [Fact]
@@ -58,7 +59,7 @@ namespace ExtensionMinder.Tests
         {
             var x = 10;
             var result = x.IsBetween(9, 11);
-            result.ShouldEqual(true);
+            result.Should().Be(true);
         }
 
         [Fact]
@@ -66,7 +67,7 @@ namespace ExtensionMinder.Tests
         {
             var x = 10;
             var result = x.IsBetween(10, 12, true);
-            result.ShouldEqual(true);
+            result.Should().Be(true);
         }
 
         [Fact]
@@ -74,7 +75,7 @@ namespace ExtensionMinder.Tests
         {
             var x = 10;
             var result = x.IsBetween(10, 12, false);
-            result.ShouldEqual(false);
+            result.Should().Be(false);
         }
 
         [Fact]
@@ -82,7 +83,7 @@ namespace ExtensionMinder.Tests
         {
             var x = 10;
             var result = x.IsBetween(100, 110);
-            result.ShouldEqual(false);
+            result.Should().Be(false);
         }
 
         [Fact]
@@ -90,7 +91,7 @@ namespace ExtensionMinder.Tests
         {
             var x = 15.123456M;
             var result = x.TruncateDecimal(2);
-            result.ShouldEqual(15.12M);
+            result.Should().Be(15.12M);
         }
 
         [Fact]
@@ -98,7 +99,7 @@ namespace ExtensionMinder.Tests
         {
             var x = 15.1999M;
             var result = x.TruncateDecimal(1);
-            result.ShouldEqual(15.1M);
+            result.Should().Be(15.1M);
         }
 
         [Fact]
@@ -106,7 +107,7 @@ namespace ExtensionMinder.Tests
         {
             var x = 0.0047568M;
             var result = x.TruncateDecimal(4);
-            result.ShouldEqual(0.0047M);
+            result.Should().Be(0.0047M);
         }
 
         [Fact]
@@ -115,7 +116,7 @@ namespace ExtensionMinder.Tests
             var x = 792m;
             var result = x.RoundDownToNearest(100);
 
-            result.ShouldEqual(700);
+            result.Should().Be(700);
         }
 
         [Fact]
@@ -124,7 +125,7 @@ namespace ExtensionMinder.Tests
             var x = 792m;
             var result = x.RoundDownToNearest(1000);
 
-            result.ShouldEqual(0);
+            result.Should().Be(0);
         }
 
         [Fact]
@@ -133,7 +134,7 @@ namespace ExtensionMinder.Tests
             var x = 792m;
             var result = x.RoundDownToNearest(10);
 
-            result.ShouldEqual(790);
+            result.Should().Be(790);
 
         }
 
@@ -143,7 +144,7 @@ namespace ExtensionMinder.Tests
             var x = 797m;
             var result = x.RoundDownToNearest(5);
 
-            result.ShouldEqual(795);
+            result.Should().Be(795);
 
         }
 
@@ -153,7 +154,7 @@ namespace ExtensionMinder.Tests
             var x = 795m;
             var result = x.RoundDownToNearest(5);
 
-            result.ShouldEqual(795);
+            result.Should().Be(795);
 
         }
 
@@ -163,7 +164,7 @@ namespace ExtensionMinder.Tests
             var x = 792m;
             var result = x.RoundUpToNearest(100);
 
-            result.ShouldEqual(800);
+            result.Should().Be(800);
         }
 
         [Fact]
@@ -172,7 +173,7 @@ namespace ExtensionMinder.Tests
             var x = 792m;
             var result = x.RoundUpToNearest(1000);
 
-            result.ShouldEqual(1000);
+            result.Should().Be(1000);
         }
 
         [Fact]
@@ -181,7 +182,7 @@ namespace ExtensionMinder.Tests
             var x = 792m;
             var result = x.RoundUpToNearest(10);
 
-            result.ShouldEqual(800);
+            result.Should().Be(800);
 
         }
 
@@ -191,7 +192,7 @@ namespace ExtensionMinder.Tests
             var x = 792m;
             var result = x.RoundUpToNearest(5);
 
-            result.ShouldEqual(795);
+            result.Should().Be(795);
 
         }
 
@@ -201,7 +202,7 @@ namespace ExtensionMinder.Tests
             var x = 795m;
             var result = x.RoundUpToNearest(5);
 
-            result.ShouldEqual(795);
+            result.Should().Be(795);
 
         }
 
@@ -210,7 +211,7 @@ namespace ExtensionMinder.Tests
         {
             var x = 1.2m;
             var result = x.Add(a => a%1 == 0 ? 0 : 1);
-            result.ShouldEqual(2.2m);
+            result.Should().Be(2.2m);
         }
 
         [Fact]
@@ -218,7 +219,7 @@ namespace ExtensionMinder.Tests
         {
             var x = 1.0m;
             var result = x.Add(a => a % 1 == 0 ? 0 : 1);
-            result.ShouldEqual(1m);
+            result.Should().Be(1m);
         }
     }
 }

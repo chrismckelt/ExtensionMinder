@@ -1,16 +1,17 @@
-﻿using Should;
+﻿
+using FluentAssertions;
 using Xunit;
 
 namespace ExtensionMinder.Tests
 {
-    public class EnumExtensionsTestFixture
+    public class EnumExtensionsTestShould
     {
         [Fact]
         public void GetDescription_ReturnsCorrectDescription()
         {
             const TestEnum x = TestEnum.FirstValue;
             var str = x.GetDescription();
-            str.ShouldEqual("First Value");
+            str.Should().Be("First Value");
         }
 
         [Fact]
@@ -18,7 +19,7 @@ namespace ExtensionMinder.Tests
         {
             const string str = "FirstValue";
             var x = str.ToEnum<TestEnum>();
-            x.ShouldEqual(TestEnum.FirstValue);
+            x.Should().Be(TestEnum.FirstValue);
         }
 
     }
