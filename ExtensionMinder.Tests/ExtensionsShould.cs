@@ -1,5 +1,5 @@
 ﻿using System;
-using Should;
+using FluentAssertions;
 using Xunit;
 
 
@@ -12,7 +12,7 @@ namespace ExtensionMinder.Tests
         {
             string s = "123456";
             string x = s.TrimToLength(3);
-            x.Length.ShouldEqual(3);
+            x.Length.Should().Be(3);
         }
 
         [Fact]
@@ -20,7 +20,7 @@ namespace ExtensionMinder.Tests
         {
             var result = "This".ShowIf(() => true);
 
-            result.ShouldEqual("This");
+            result.Should().Be("This");
         }
 
         [Fact]
@@ -28,7 +28,7 @@ namespace ExtensionMinder.Tests
         {
             var result = "This".ShowIf(() => false);
 
-            result.ShouldEqual("");
+            result.Should().Be("");
         }
     }
 }

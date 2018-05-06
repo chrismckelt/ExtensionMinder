@@ -1,5 +1,5 @@
 ﻿using System;
-using Should;
+using FluentAssertions;
 using Xunit;
 
 namespace ExtensionMinder.Tests
@@ -15,7 +15,7 @@ namespace ExtensionMinder.Tests
 
             var result = between.IsBetween(start, end);
 
-            result.ShouldEqual(true);
+            result.Should().Be(true);
         }
 
         [Fact]
@@ -27,7 +27,7 @@ namespace ExtensionMinder.Tests
 
             var result = between.IsBetween(start, end);
 
-            result.ShouldEqual(false);
+            result.Should().Be(false);
         }
 
         [Fact]
@@ -39,7 +39,7 @@ namespace ExtensionMinder.Tests
 
             var result = between.IsBetween(start, end, true);
 
-            result.ShouldEqual(true);
+            result.Should().Be(true);
         }
 
         [Fact]
@@ -51,7 +51,7 @@ namespace ExtensionMinder.Tests
 
             var result = between.IsBetween(start, end, false);
 
-            result.ShouldEqual(false);
+            result.Should().Be(false);
         }
 
         [Fact]
@@ -59,9 +59,9 @@ namespace ExtensionMinder.Tests
         {
             var date = new DateTime(2010, 01, 01);
             var start = date.GetFinancialYearStartDate();
-            start.Year.ShouldEqual(2009);
-            start.Month.ShouldEqual(7);
-            start.Day.ShouldEqual(1);
+            start.Year.Should().Be(2009);
+            start.Month.Should().Be(7);
+            start.Day.Should().Be(1);
         }
 
         [Fact]
@@ -69,9 +69,9 @@ namespace ExtensionMinder.Tests
         {
             var date = new DateTime(2010, 11, 01);
             var end = date.GetFinancialYearStartDate();
-            end.Year.ShouldEqual(2010);
-            end.Month.ShouldEqual(7);
-            end.Day.ShouldEqual(1);
+            end.Year.Should().Be(2010);
+            end.Month.Should().Be(7);
+            end.Day.Should().Be(1);
         }
 
         [Fact]
@@ -80,7 +80,7 @@ namespace ExtensionMinder.Tests
             var date = new DateTime(2010, 10, 10, 10, 10, 10);
             var endOfDay = new DateTime(2010, 10, 10, 23, 59, 59);
             var result = date.EndOfDay();
-            result.ShouldEqual(endOfDay);
+            result.Should().Be(endOfDay);
         }
 
         [Fact]
@@ -88,7 +88,7 @@ namespace ExtensionMinder.Tests
         {
             var dob = DateTime.Now.AddDays(1).AddYears(-10);
             var age = dob.CalculateAge();
-            age.ShouldEqual(9);
+            age.Should().Be(9);
         }
 
         [Fact]
@@ -96,7 +96,7 @@ namespace ExtensionMinder.Tests
         {
             var dob = DateTime.Now.AddDays(-1).AddYears(-10);
             var age = dob.CalculateAge();
-            age.ShouldEqual(10);
+            age.Should().Be(10);
         }
     }
 }
