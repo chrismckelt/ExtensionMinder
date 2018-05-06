@@ -16,6 +16,6 @@
     <tags>Extension,Extensions, Extension Methods</tags>
   </metadata>
   <files>
-	  <file src="build\**" target="build" />
+	  <file src="bin\**" target="build" />
   </files>
 </package>
