@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -12,7 +14,15 @@ namespace ExtensionMinder
     /// </summary>
     public static class StringExtension
     {
-        public static string Escape(this string s)
+
+      public static IEnumerable<string> SplitSentenceIntoWords(this string sentence)
+      {
+        var punctuation = sentence.Where(Char.IsPunctuation).Distinct().ToArray();
+        var words = sentence.Split().Select(x => x.Trim(punctuation));
+        return words;
+      }
+
+      public static string Escape(this string s)
         {
             return HttpUtility.HtmlEncode(s);
         }
