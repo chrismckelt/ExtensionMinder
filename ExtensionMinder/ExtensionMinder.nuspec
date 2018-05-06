@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>ExtensionMinder</id>
+    <version>$version$</version>
+    <title>Extension Minder</title>
+    <authors>Chris McKelt</authors>
+    <owners>Chris McKelt</owners>
+    <licenseUrl>https://github.com/chrismckelt/ExtensionMinder/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/chrismckelt/ExtensionMinder</projectUrl>
+    <iconUrl>https://raw.githubusercontent.com/chrismckelt/ExtensionMinder/master/icon.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>A collection of extension methods gathered over the years. Organised by category - (Collection,DateTime,Enum,Exception,File,Math,Reflection,Serializer,Spelling,Stream,String)</description>
+    <releaseNotes>.net core upgrade</releaseNotes>
+    <copyright>Copyright &#x00A9; McKelt Solutions</copyright>
+    <tags>Extension,Extensions, Extension Methods</tags>
+  </metadata>
+  <files>
+	  <file src="build\**" target="build" />
+  </files>
+</package>

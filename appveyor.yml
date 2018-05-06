@@ -17,7 +17,7 @@ build:
   verbosity: normal
   publish_nuget: true
 after_build:
-  - cmd: nuget pack "c:\projects\ExtensionMinder\ExtensionMinder\ExtensionMinder.csproj" -properties Configuration=Release -IncludeReferencedProjects /p:PackageVersion=%APPVEYOR_BUILD_VERSION%
+  - cmd: nuget pack "c:\projects\ExtensionMinder\ExtensionMinder\ExtensionMinder.csproj" -properties Configuration=Release -IncludeReferencedProjects
 artifacts:
   - path: '**\*.nupkg' # find all NuGet packages recursively
 deploy:
