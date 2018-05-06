@@ -1,4 +1,7 @@
-﻿using Xunit;
+﻿using System;
+using System.Linq;
+using FluentAssertions;
+using Xunit;
 
 namespace ExtensionMinder.Tests
 {
@@ -10,6 +13,19 @@ namespace ExtensionMinder.Tests
         var to = new TestObject {StringProperty = "   hello   "};
         var result = to.TrimAllStrings();
         Assert.Equal("hello", result.StringProperty);
+      }
+
+      [Fact]
+      public void SplitSentenceIntoWords_removes_junk()
+      {
+        const string test = "hell this ain't the best! words to split 123";
+        var words = test.SplitSentenceIntoWords();
+        foreach (var word in words)
+        {
+          Console.WriteLine(word);
+        }
+
+        words.Count().Should().Be(9);
       }
     }
 }
