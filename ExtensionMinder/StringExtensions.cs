@@ -202,5 +202,14 @@ namespace ExtensionMinder
 
       return obj;
     }
+
+    public static string Clean(this string str)
+    {
+      if (string.IsNullOrEmpty(str)) return str;
+      string n = str.Replace(" ", "");
+      n = n.Replace("&", "");
+      n = n.Replace("-", "");
+      return n;
+    }
   }
 }
