@@ -187,7 +187,7 @@ namespace ExtensionMinder
         var currentNodeType = p.PropertyType;
         if (currentNodeType == typeof(string))
         {
-          var currentValue = (string) p.GetValue(obj, null);
+          var currentValue = (string)p.GetValue(obj, null);
           if (currentValue != null) p.SetValue(obj, currentValue.Trim(), null);
         }
         // see http://stackoverflow.com/questions/4444908/detecting-native-objects-with-reflection
@@ -196,11 +196,21 @@ namespace ExtensionMinder
           if (p.GetIndexParameters().Length == 0)
             p.GetValue(obj, null).TrimAllStrings();
           else
-            p.GetValue(obj, new object[] {0}).TrimAllStrings();
+            p.GetValue(obj, new object[] { 0 }).TrimAllStrings();
         }
       }
 
       return obj;
     }
+
+    public static string Clean(this string str)
+    {
+      if (string.IsNullOrEmpty(str)) return str;
+      string n = str.Replace(" ", "");
+      n = n.Replace("&", "");
+      n = n.Replace("-", "");
+      return n;
+    }
+
   }
 }

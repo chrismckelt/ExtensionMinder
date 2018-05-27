@@ -27,5 +27,12 @@ namespace ExtensionMinder.Tests
 
         words.Count().Should().Be(9);
       }
+
+      [Fact]
+      public void Clean_removes_dodgy_characters()
+      {
+        string text = @"abcd&efg-h";
+        text.Clean().Should().Be("abcdefgh");
+      }
     }
 }
