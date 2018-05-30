@@ -80,18 +80,8 @@ namespace ExtensionMinder
                 .Select(x => x.Item1 + letter + x.Item2);
         }
     }
-    public static class SetExtensions
-    {
-        public static void AddRange(this ISet<string> set, IEnumerable<string> other )
-        {
-            foreach (var element in other)
-            {
-                if (!string.IsNullOrWhiteSpace(element))
-                    set.Add(element);
-            }
-        }
-    }
-    public enum SpellingVariants
+
+  public enum SpellingVariants
     {
         None = 0,
         One = 1,

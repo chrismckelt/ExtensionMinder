@@ -14,5 +14,26 @@ namespace ExtensionMinder
                 totalBytesCopied += stream.Read(buffer, totalBytesCopied, Convert.ToInt32(stream.Length) - totalBytesCopied);
             return buffer;
         }
-    }
+
+      public static string ConvertToString(this Stream stream)
+      {
+        if (stream == null) throw new Exception("No stream available for the request");
+        using (var sr = new StreamReader(stream))
+        {
+          return sr.ReadToEnd();
+        }
+      }
+
+      public static void ConvertToFile(this Stream stream, string filepath)
+      {
+        var file = new FileInfo(filepath);
+
+        file.Directory?.Create();
+
+        using (var fileStream = File.Create(filepath))
+        {
+          stream.CopyTo(fileStream);
+        }
+      }
+  }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -17,7 +18,7 @@ namespace ExtensionMinder
   {
     public static IEnumerable<string> SplitSentenceIntoWords(this string sentence)
     {
-      var punctuation = sentence.Where(char.IsPunctuation).Distinct().ToArray();
+      var punctuation = sentence.Where(Char.IsPunctuation).Distinct().ToArray();
       var words = sentence.Split().Select(x => x.Trim(punctuation));
       return words;
     }
@@ -41,7 +42,7 @@ namespace ExtensionMinder
     public static bool In(this string value, params string[] stringValues)
     {
       foreach (var otherValue in stringValues)
-        if (string.CompareOrdinal(value, otherValue) == 0)
+        if (String.CompareOrdinal(value, otherValue) == 0)
           return true;
 
       return false;
@@ -81,7 +82,7 @@ namespace ExtensionMinder
     /// </returns>
     public static string Format(this string value, object arg0)
     {
-      return string.Format(value, arg0);
+      return String.Format(value, arg0);
     }
 
     /// <summary>
@@ -96,27 +97,27 @@ namespace ExtensionMinder
     /// </returns>
     public static string Format(this string value, params object[] args)
     {
-      return string.Format(value, args);
+      return String.Format(value, args);
     }
 
 
     public static string Base64Encode(this string plainText)
     {
-      if (string.IsNullOrWhiteSpace(plainText)) return null;
+      if (String.IsNullOrWhiteSpace(plainText)) return null;
       var plainTextBytes = Encoding.UTF8.GetBytes(plainText);
       return Convert.ToBase64String(plainTextBytes);
     }
 
     public static string Base64Decode(this string base64EncodedData)
     {
-      if (string.IsNullOrWhiteSpace(base64EncodedData)) return null;
+      if (String.IsNullOrWhiteSpace(base64EncodedData)) return null;
       var base64EncodedBytes = Convert.FromBase64String(base64EncodedData);
       return Encoding.UTF8.GetString(base64EncodedBytes);
     }
 
     public static bool IsValidRegex(this string pattern)
     {
-      if (string.IsNullOrEmpty(pattern)) return false;
+      if (String.IsNullOrEmpty(pattern)) return false;
 
       try
       {
@@ -134,7 +135,7 @@ namespace ExtensionMinder
 
     public static string ToCamelCase(this string str)
     {
-      if (!string.IsNullOrEmpty(str))
+      if (!String.IsNullOrEmpty(str))
       {
         if (str.Length < 2) return str.ToLowerInvariant();
 
@@ -205,7 +206,7 @@ namespace ExtensionMinder
 
     public static string Clean(this string str)
     {
-      if (string.IsNullOrEmpty(str)) return str;
+      if (String.IsNullOrEmpty(str)) return str;
       string n = str.Replace(" ", "");
       n = n.Replace("&", "");
       n = n.Replace("-", "");
@@ -229,6 +230,113 @@ namespace ExtensionMinder
     {
       Regex rgx = new Regex("[^0-9]");
       return rgx.Replace(input, "");
+    }
+
+    public static string ToLowerInvariantWithOutSpaces(this string s)
+    {
+      return s.ToLowerInvariant().Replace(" ", String.Empty).Trim();
+    }
+
+    public static string TrimToLength(this string s, int length)
+    {
+      if (String.IsNullOrWhiteSpace(s)) return s;
+
+      if (s.Length > length)
+        return s.Substring(0, length);
+
+      return s;
+    }
+
+    public static string MakeValidXml(this string s)
+    {
+      return Regex.Replace(s, (@"(?<=\<\w+)[#\{\}\(\)\&](?=\>)|(?<=\</\w+)[#\{\}\(\)\&](?=\>)"), "-");
+    }
+
+    public static string MakeValidUrl(this string s)
+    {
+      s = Regex.Replace(s, @"[^a-z0-9\s-]", ""); // Remove all non valid chars          
+      s = Regex.Replace(s, @"\s+", " ").Trim(); // convert multiple spaces into one space  
+      s = Regex.Replace(s, @"\s", "-"); // //Replace spaces by dashes
+      return s;
+    }
+
+    public static string ToDefaultString(this string s, string defaultText)
+    {
+      if (String.IsNullOrWhiteSpace(s))
+        return defaultText.Trim();
+
+      return s.Trim();
+    }
+
+    public static string RemoveJunkWordsFromNumber(this string s)
+    {
+      s = s.Replace("years", String.Empty);
+      s = s.Replace("year", String.Empty);
+      s = s.Replace("%", String.Empty);
+      s = s.Replace("$", String.Empty);
+      s = s.Replace("-", String.Empty);
+      return s;
+    }
+
+    public static string MakeValidFileName(this string s)
+    {
+      return Path.GetInvalidFileNameChars().Aggregate(s, (current, c) => current.Replace(c, '_'));
+    }
+
+    public static string ToSentenceCase(this string str)
+    {
+      if (str.Length == 0) return str;
+
+      var lowerCase = str.ToLower();
+
+      // matches the first sentence of a string, as well as subsequent sentences
+      var r = new Regex(@"(^[a-z])|\.\s+(.)", RegexOptions.ExplicitCapture);
+
+      // MatchEvaluator delegate defines replacement of sentence starts to uppercase
+      var result = r.Replace(lowerCase, s => s.Value.ToUpper());
+
+      return result;
+    }
+
+    /// <summary>
+    ///convert text to Pascal Case
+    /// </summary>
+    /// <param name="text"></param>
+    /// <returns></returns>
+    public static string ToPascalCase(this string str)
+    {
+      //if nothing is proivided throw a null argument exception
+      if (str == null) throw new ArgumentNullException("str", "Null text cannot be converted!");
+
+      if (str.Length == 0) return str;
+
+      //split the provided string into an array of words
+      string[] words = str.Split(' ');
+
+      //loop through each word in the array
+      for (int i = 0; i < words.Length; i++)
+      {
+        //if the current word is greater than 1 character long
+        if (words[i].Length > 0)
+        {
+          //grab the current word
+          string word = words[i];
+
+          //convert the first letter in the word to uppercase
+          char firstLetter = Char.ToUpper(word[0]);
+
+          //concantenate the uppercase letter to the rest of the word
+          words[i] = firstLetter + word.Substring(1);
+        }
+      }
+
+      //return the converted text
+      return String.Join(String.Empty, words);
+    }
+
+    public static string AddSpacesToSentence(this string text)
+    {
+      return Regex.Replace(text, "([a-z])([A-Z])", "$1 $2");
     }
   }
 }
