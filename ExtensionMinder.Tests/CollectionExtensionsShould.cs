@@ -1,16 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using FizzWare.NBuilder;
-
 using Xunit;
  
-
 namespace ExtensionMinder.Tests
 {
     public class CollectionExtensionsShould
     {
         [Fact]
-        public void EachWillPerformAction()
+        public void Each_will_perform_action()
         {
             const int i = 77;
 
@@ -27,7 +25,7 @@ namespace ExtensionMinder.Tests
         }
 
         [Fact]
-        public void MaxByWillSelectMax()
+        public void Max_by_will_select_max()
         {
             const int i = 1;
 
@@ -44,7 +42,7 @@ namespace ExtensionMinder.Tests
         }
 
         [Fact]
-        public void MaxByWillSelectMaxWithSpecifiedComparer()
+        public void Max_by_will_select_max_with_specified_comparer()
         {
             const int i = 1;
 
@@ -61,7 +59,7 @@ namespace ExtensionMinder.Tests
         }
 
         [Fact]
-        public void MapWorks()
+        public void Map_by()
         {
             const int i = 1;
 
@@ -82,7 +80,7 @@ namespace ExtensionMinder.Tests
         }
 
         [Fact]
-        public void GetDuplicatesWorks()
+        public void Get_duplicates()
         {
             const int i = 1;
 

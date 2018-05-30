@@ -8,7 +8,7 @@ namespace ExtensionMinder.Tests
   public class StringExtensionShould
   {
     [Fact]
-    public void TrimAllStrings_trims_all_strings()
+    public void Trim_all_strings()
     {
       var to = new TestObject {StringProperty = "   hello   "};
       var result = to.TrimAllStrings();
@@ -16,7 +16,7 @@ namespace ExtensionMinder.Tests
     }
 
     [Fact]
-    public void SplitSentenceIntoWords_removes_junk()
+    public void Split_sentence_into_words_removes_junk()
     {
       const string test = "hell this ain't the best! words to split 123";
       var words = test.SplitSentenceIntoWords();
@@ -33,14 +33,14 @@ namespace ExtensionMinder.Tests
     }
 
     [Fact]
-    public void ToAlphaNumericOnly()
+    public void To_alpha_numeric_only()
     {
       var text = @"abc123!@#";
       text.ToAlphaNumericOnly().Should().Be("abc123");
     }
 
     [Fact]
-    public void ToAlphaOnly()
+    public void To_alpha_only()
     {
       var text = @"abc123!@#";
       text.ToAlphaOnly().Should().Be("abc");
@@ -48,10 +48,18 @@ namespace ExtensionMinder.Tests
 
 
     [Fact]
-    public void ToNumericOnly()
+    public void To_numeric_only()
     {
       var text = @"abc123!@#";
       text.ToNumericOnly().Should().Be("123");
+    }
+
+    [Fact]
+    public void Trim_to_length_should_cut_string_to_specfied_length()
+    {
+      string s = "123456";
+      string x = s.TrimToLength(3);
+      x.Length.Should().Be(3);
     }
   }
 }

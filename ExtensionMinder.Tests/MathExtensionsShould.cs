@@ -7,7 +7,7 @@ namespace ExtensionMinder.Tests
     public class MathExtensionsShould
     {
         [Fact]
-        public void MultiplyBy100ShouldSetCorrectValue()
+        public void Multiply_by_100_should_set_correct_value()
         {
             decimal x = 10;
             decimal y = x.MultiplyBy(100);
@@ -15,7 +15,7 @@ namespace ExtensionMinder.Tests
         }
 
         [Fact]
-        public void DivideBy100ShouldSetCorrectValue()
+        public void Divide_by_100_should_set_correct_value()
         {
             decimal x = 1000;
             decimal y = x.DivideBy(100);
@@ -23,7 +23,7 @@ namespace ExtensionMinder.Tests
         }
 
         [Fact]
-        public void RoundUpShouldRoundDecimalValueUp()
+        public void Round_up_should_round_decimal_value_up()
         {
             var value = 123.3333333M;
             var result = value.RoundUp(2);
@@ -31,7 +31,7 @@ namespace ExtensionMinder.Tests
         }
 
         [Fact]
-        public void RoundUpShouldRoundDoubleValueUp()
+        public void Round_up_should_round_double_value_up()
         {
             var value = 123.3333333;
             var result = value.RoundUp(2);
@@ -39,7 +39,7 @@ namespace ExtensionMinder.Tests
         }
 
         [Fact]
-        public void RoundUpShouldRoundEdgeCaseDecmialUp()
+        public void Round_up_should_round_edge_case_decmial_up()
         {
             var value = 123.000001M;
             var result = value.RoundUp(2);
@@ -47,7 +47,7 @@ namespace ExtensionMinder.Tests
         }
 
         [Fact]
-        public void RoundUpShouldRoundEdgeCaseDoubleUp()
+        public void Round_up_should_round_edge_case_double_up()
         {
             var value = 123.000001;
             var result = value.RoundUp(2);
@@ -55,7 +55,7 @@ namespace ExtensionMinder.Tests
         }
 
         [Fact]
-        public void IsBetweenCorrectlyIdentifiesBetweenValue()
+        public void Is_between_correctly_identifies_between_value()
         {
             var x = 10;
             var result = x.IsBetween(9, 11);
@@ -63,7 +63,7 @@ namespace ExtensionMinder.Tests
         }
 
         [Fact]
-        public void IsBetweenWorksForBoundaryCase()
+        public void Is_between_for_boundary_case()
         {
             var x = 10;
             var result = x.IsBetween(10, 12, true);
@@ -71,7 +71,7 @@ namespace ExtensionMinder.Tests
         }
 
         [Fact]
-        public void IsBetweenWorksForBoundaryCaseWhenExcludingBoundaries()
+        public void Is_between_for_boundary_case_when_excluding_boundaries()
         {
             var x = 10;
             var result = x.IsBetween(10, 12, false);
@@ -79,7 +79,7 @@ namespace ExtensionMinder.Tests
         }
 
         [Fact]
-        public void IsBetweenWorksWhenValueNotBetween()
+        public void Is_between_when_value_not_between()
         {
             var x = 10;
             var result = x.IsBetween(100, 110);
@@ -87,7 +87,7 @@ namespace ExtensionMinder.Tests
         }
 
         [Fact]
-        public void TruncateWorksForSimpleDecimal()
+        public void Truncate_for_simple_decimal()
         {
             var x = 15.123456M;
             var result = x.TruncateDecimal(2);
@@ -95,7 +95,7 @@ namespace ExtensionMinder.Tests
         }
 
         [Fact]
-        public void TruncateWorksForSimpleDecimalAndDoesNotRoundUp()
+        public void Truncate_for_simple_decimal_and_does_not_round_up()
         {
             var x = 15.1999M;
             var result = x.TruncateDecimal(1);
@@ -103,7 +103,7 @@ namespace ExtensionMinder.Tests
         }
 
         [Fact]
-        public void TruncateWorksForDecimalWithZeroIntegral()
+        public void Truncate_for_decimal_with_zero_integral()
         {
             var x = 0.0047568M;
             var result = x.TruncateDecimal(4);
@@ -111,7 +111,7 @@ namespace ExtensionMinder.Tests
         }
 
         [Fact]
-        public void RoundToNearest100Works()
+        public void Round_to_nearest_100()
         {
             var x = 792m;
             var result = x.RoundDownToNearest(100);
@@ -120,7 +120,7 @@ namespace ExtensionMinder.Tests
         }
 
         [Fact]
-        public void RoundToNearest1000Works()
+        public void Round_to_nearest_1000()
         {
             var x = 792m;
             var result = x.RoundDownToNearest(1000);
@@ -129,7 +129,7 @@ namespace ExtensionMinder.Tests
         }
 
         [Fact]
-        public void RoundToNearest10Works()
+        public void Round_to_nearest_10()
         {
             var x = 792m;
             var result = x.RoundDownToNearest(10);
@@ -139,7 +139,7 @@ namespace ExtensionMinder.Tests
         }
 
         [Fact]
-        public void RoundToNearest5Works()
+        public void Round_to_nearest_5()
         {
             var x = 797m;
             var result = x.RoundDownToNearest(5);
@@ -149,7 +149,7 @@ namespace ExtensionMinder.Tests
         }
 
         [Fact]
-        public void RoundToNearestExactWorks()
+        public void Round_to_nearest_exact()
         {
             var x = 795m;
             var result = x.RoundDownToNearest(5);
@@ -159,7 +159,7 @@ namespace ExtensionMinder.Tests
         }
 
         [Fact]
-        public void RoundUpToNearest100Works()
+        public void Round_up_to_nearest_100()
         {
             var x = 792m;
             var result = x.RoundUpToNearest(100);
@@ -168,7 +168,7 @@ namespace ExtensionMinder.Tests
         }
 
         [Fact]
-        public void RoundUpToNearest1000Works()
+        public void Round_up_to_nearest_1000()
         {
             var x = 792m;
             var result = x.RoundUpToNearest(1000);
@@ -177,7 +177,7 @@ namespace ExtensionMinder.Tests
         }
 
         [Fact]
-        public void RoundUpToNearest10Works()
+        public void Round_up_to_nearest_10()
         {
             var x = 792m;
             var result = x.RoundUpToNearest(10);
@@ -187,7 +187,7 @@ namespace ExtensionMinder.Tests
         }
 
         [Fact]
-        public void RoundUpToNearest5Works()
+        public void Round_up_to_nearest_5()
         {
             var x = 792m;
             var result = x.RoundUpToNearest(5);
@@ -197,7 +197,7 @@ namespace ExtensionMinder.Tests
         }
 
         [Fact]
-        public void RoundUpToNearestExactWorks()
+        public void Round_up_to_nearest_exact()
         {
             var x = 795m;
             var result = x.RoundUpToNearest(5);
@@ -207,7 +207,7 @@ namespace ExtensionMinder.Tests
         }
 
         [Fact]
-        public void AddWithFunc_Works_ByAddingOne()
+        public void Add_with_func__by_adding_one()
         {
             var x = 1.2m;
             var result = x.Add(a => a%1 == 0 ? 0 : 1);
@@ -215,7 +215,7 @@ namespace ExtensionMinder.Tests
         }
 
         [Fact]
-        public void AddWithFunc_Works_ByAddingZero()
+        public void Add_with_func__by_adding_zero()
         {
             var x = 1.0m;
             var result = x.Add(a => a % 1 == 0 ? 0 : 1);
