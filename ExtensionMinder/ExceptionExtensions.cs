@@ -21,5 +21,14 @@ namespace ExtensionMinder
             }
             return ExceptionDispatchInfo.Capture(ex);
         }
-    }
+
+      public static Exception GetInnerMostException(this Exception ex)
+      {
+        Exception innerMostException = ex;
+        while (innerMostException.InnerException != null)
+          innerMostException = innerMostException.InnerException;
+
+        return innerMostException;
+      }
+  }
 }
