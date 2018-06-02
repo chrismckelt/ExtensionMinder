@@ -2,6 +2,13 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Version>3</Version>
+    <Authors>Chris McKelt</Authors>
+    <Company>mckelt.com</Company>
+    <Description>Extension methods for collections, strings,dates, math, enums, reflection and more</Description>
+    <PackageProjectUrl>https://github.com/chrismckelt/ExtensionMinder</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/chrismckelt/ExtensionMinder</RepositoryUrl>
   </PropertyGroup>
 
 </Project>
