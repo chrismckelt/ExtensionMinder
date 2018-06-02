@@ -25,11 +25,14 @@ namespace ExtensionMinder.Tests
       words.Count().Should().Be(9);
     }
 
-    [Fact]
-    public void Clean_removes_dodgy_characters()
+    [Theory]
+    [InlineData("abcd&efg-h", "abcdefgh")]
+    [InlineData("abc!@#$%&*(", "abc")]
+    [InlineData("123!", "123")]
+    [InlineData("123! 456", "123 456")]
+    public void Clean_removes_dodgy_characters(string text, string expected)
     {
-      var text = @"abcd&efg-h";
-      text.Clean().Should().Be("abcdefgh");
+      text.Clean().Should().Be(expected);
     }
 
     [Fact]

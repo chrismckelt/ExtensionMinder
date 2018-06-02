@@ -204,15 +204,12 @@ namespace ExtensionMinder
       return obj;
     }
 
-    public static string Clean(this string str)
+    public static string Clean(this string input, string regex = "[^a-z^0-9^ ^-^_]", string replaceWith = "")
     {
-      if (String.IsNullOrEmpty(str)) return str;
-      string n = str.Replace(" ", "");
-      n = n.Replace("&", "");
-      n = n.Replace("-", "");
-      return n;
+      if (String.IsNullOrEmpty(input)) return input;
+      
+      return System.Text.RegularExpressions.Regex.Replace(input, regex, replaceWith, System.Text.RegularExpressions.RegexOptions.IgnoreCase);
     }
-
 
     public static string ToAlphaNumericOnly(this string input)
     {
