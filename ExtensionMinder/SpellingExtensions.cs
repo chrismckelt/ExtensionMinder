@@ -27,10 +27,11 @@ namespace ExtensionMinder
             var set = new HashSet<string>();
 
             var splits = Splits(set, word);
-            set.AddRange(Deletes(splits));
-            set.AddRange(Transposes(splits));
-            set.AddRange(Replaces(splits));
-            set.AddRange(Inserts(splits));
+            var arr = splits as Tuple<string, string>[] ?? splits.ToArray();
+            set.AddRange(Deletes(arr));
+            set.AddRange(Transposes(arr));
+            set.AddRange(Replaces(arr));
+            set.AddRange(Inserts(arr));
 
             return set;
         }
