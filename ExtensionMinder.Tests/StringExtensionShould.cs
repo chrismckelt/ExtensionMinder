@@ -49,7 +49,6 @@ namespace ExtensionMinder.Tests
             text.ToAlphaOnly().Should().Be("abc");
         }
 
-
         [Fact]
         public void To_numeric_only()
         {
@@ -73,6 +72,28 @@ namespace ExtensionMinder.Tests
         public void IsGibberish_should_detect(string text, bool isGibberish)
         {
             text.IsGibberish().Should().Be(isGibberish);
+        }
+
+        [Fact]
+        public void Be_true_if_more_numbers_than_letters()
+        {
+            string text = "abc1234";
+            text.IsGibberish().Should().Be(true);
+        }
+
+        [Fact]
+        public void Be_false_if_more_numbers_than_letters()
+        {
+            string text = "abcd123";
+            text.IsGibberish().Should().Be(false);
+
+        }
+
+        [Fact]
+        public void Be_false_if_more_number_count_same_as_letter_count()
+        {
+            string text = "abc123";
+            text.IsGibberish().Should().Be(false);
         }
     }
 }
