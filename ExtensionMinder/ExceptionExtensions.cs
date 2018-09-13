@@ -9,7 +9,7 @@ namespace ExtensionMinder
         {
             if (ex == null) throw new NullReferenceException("UnrollDynamicallyInvokedException given null exception");
             var inner = ex.InnerException;
-            while (inner.InnerException != null)
+            while (inner?.InnerException != null)
             {
                 inner = inner.InnerException;
             }

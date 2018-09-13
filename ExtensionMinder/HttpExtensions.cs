@@ -4,21 +4,16 @@ using System.Web;
 
 namespace ExtensionMinder
 {
-  public static class HttpExtensions
-  {
-    public static string ToQueryString(this NameValueCollection coll, bool useQuestionMarkToStart = false)
+    public static class HttpExtensions
     {
-      var qs= string.Join("&",
-        coll.Cast<string>().Select(a => string.Format("{0}={1}",
-          HttpUtility.UrlEncode(a),
-          HttpUtility.UrlEncode(coll[a]))));
+        public static string ToQueryString(this NameValueCollection coll, bool useQuestionMarkToStart = false)
+        {
+            var qs = string.Join("&",
+                coll.Cast<string>().Select(a => $"{HttpUtility.UrlEncode(a)}={HttpUtility.UrlEncode(coll[a])}"));
 
-      if (useQuestionMarkToStart)
-      {
-        return "?" + qs;
-      }
+            if (useQuestionMarkToStart) return "?" + qs;
 
-      return qs;
+            return qs;
+        }
     }
-  }
 }
