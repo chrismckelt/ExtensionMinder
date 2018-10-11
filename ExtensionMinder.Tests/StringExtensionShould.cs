@@ -38,8 +38,15 @@ namespace ExtensionMinder.Tests
         [Fact]
         public void To_alpha_numeric_only()
         {
-            var text = @"abc123!@#";
-            text.ToAlphaNumericOnly().Should().Be("abc123");
+            var text = @"a1!b2&c3$";
+            text.ToAlphaNumericOnly(" ").Should().Be("a1 b2 c3");
+        }
+
+        [Fact]
+        public void To_alpha_numeric_only_with_spaces()
+        {
+            var text = @"abc!123!@#";
+            text.ToAlphaNumericOnly(" ").Should().Be("abc 123");
         }
 
         [Fact]
@@ -50,11 +57,19 @@ namespace ExtensionMinder.Tests
         }
 
         [Fact]
+        public void To_alpha_only_with_spaces()
+        {
+            var text = @"a1b2c3!@#";
+            text.ToAlphaOnly(" ").Should().Be("a b c");
+        }
+
+        [Fact]
         public void To_numeric_only()
         {
             var text = @"abc123!@#";
             text.ToNumericOnly().Should().Be("123");
         }
+
 
         [Fact]
         public void Trim_to_length_should_cut_string_to_specfied_length()
