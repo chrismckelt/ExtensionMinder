@@ -210,25 +210,25 @@ namespace ExtensionMinder
         {
             if (string.IsNullOrEmpty(input)) return input;
 
-            return Regex.Replace(input, regex, replaceWith, RegexOptions.IgnoreCase);
+            return Regex.Replace(input, regex, replaceWith, RegexOptions.IgnoreCase).Trim();
         }
 
-        public static string ToAlphaNumericOnly(this string input)
+        public static string ToAlphaNumericOnly(this string input, string replaceWith = "")
         {
             var rgx = new Regex("[^a-zA-Z0-9]");
-            return rgx.Replace(input, "");
+            return rgx.Replace(input, replaceWith).Trim();
         }
 
-        public static string ToAlphaOnly(this string input)
+        public static string ToAlphaOnly(this string input, string replaceWith = "")
         {
             var rgx = new Regex("[^a-zA-Z]");
-            return rgx.Replace(input, "");
+            return rgx.Replace(input, replaceWith).Trim();
         }
 
-        public static string ToNumericOnly(this string input)
+        public static string ToNumericOnly(this string input, string replaceWith = "")
         {
             var rgx = new Regex("[^0-9]");
-            return rgx.Replace(input, "");
+            return rgx.Replace(input, replaceWith).Trim();
         }
 
         public static string ToLowerInvariantWithOutSpaces(this string s)
