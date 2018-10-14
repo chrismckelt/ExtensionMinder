@@ -210,7 +210,9 @@ namespace ExtensionMinder
         {
             if (string.IsNullOrEmpty(input)) return input;
 
-            return Regex.Replace(input, regex, replaceWith, RegexOptions.IgnoreCase).Trim();
+            string text = Regex.Replace(input, regex, replaceWith, RegexOptions.IgnoreCase).Trim();
+            text = Regex.Replace(text, @"\s+", " ", RegexOptions.Multiline);
+            return text;
         }
 
         public static string ToAlphaNumericOnly(this string input, string replaceWith = "")

@@ -30,6 +30,7 @@ namespace ExtensionMinder.Tests
         [InlineData("abc!@#$%&*(", "abc")]
         [InlineData("123!", "123")]
         [InlineData("123! 456", "123 456")]
+        [InlineData("aaa    aaa", "aaa aaa")]
         public void Clean_removes_dodgy_characters(string text, string expected)
         {
             text.Clean().Should().Be(expected);
