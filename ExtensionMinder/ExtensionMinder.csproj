@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>3.3.0</Version>
+    <Version>3.3.1</Version>
     <Authors>Chris McKelt</Authors>
     <Company>mckelt.com</Company>
     <Description>Extension methods for collections, strings,dates, math, enums, reflection and more</Description>
@@ -12,7 +12,7 @@
     <PackageTags>extension, extension methods</PackageTags>
     <RepositoryType>Git</RepositoryType>
     <PackageIconUrl>https://user-images.githubusercontent.com/662868/40871425-1eca8438-666e-11e8-9ad6-c884847deb37.png</PackageIconUrl>
-    <PackageReleaseNotes>IsGibberish word check, date extensions clean up</PackageReleaseNotes>
+    <PackageReleaseNotes>surround with AND surround with double quotes</PackageReleaseNotes>
   </PropertyGroup>
 
 </Project>

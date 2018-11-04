@@ -17,6 +17,17 @@ namespace ExtensionMinder
     /// </summary>
     public static class StringExtension
     {
+
+        public static string SurroundWithDoubleQuotes(this string text)
+        {
+            return SurroundWith(text, "\"");
+        }
+
+        public static string SurroundWith(this string text, string ends)
+        {
+            return ends + text + ends;
+        }
+
         public static IEnumerable<string> SplitSentenceIntoWords(this string sentence)
         {
             var punctuation = sentence.Where(char.IsPunctuation).Distinct().ToArray();
@@ -302,12 +313,12 @@ namespace ExtensionMinder
         /// <summary>
         ///     convert text to Pascal Case
         /// </summary>
-        /// <param name="text"></param>
+        /// <param name="str"></param>
         /// <returns></returns>
         public static string ToPascalCase(this string str)
         {
             //if nothing is proivided throw a null argument exception
-            if (str == null) throw new ArgumentNullException("str", "Null text cannot be converted!");
+            if (str == null) throw new ArgumentNullException(nameof(str), "Null text cannot be converted!");
 
             if (str.Length == 0) return str;
 

@@ -7,6 +7,15 @@ namespace ExtensionMinder.Tests
 {
     public class StringExtensionShould
     {
+
+        [Fact]
+        public void Surround_with_double_quotes()
+        {
+            string expect = @"""aaa""";
+            string actual = "aaa".SurroundWithDoubleQuotes();
+            expect.Should().Be(actual);
+        }
+
         [Fact]
         public void Trim_all_strings()
         {
