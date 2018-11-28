@@ -221,5 +221,13 @@ namespace ExtensionMinder.Tests
             var result = x.Add(a => a % 1 == 0 ? 0 : 1);
             result.Should().Be(1m);
         }
+
+        [Fact]
+        public void Percent_valid()
+        {
+            double d = 100d;
+            d.Percent(20).Should().Be(20);
+
+        }
     }
 }

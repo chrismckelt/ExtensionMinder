@@ -124,5 +124,11 @@ namespace ExtensionMinder
         {
             return x - func(x);
         }
+
+        public static double Percent(this double number,int percent)
+        {
+            //return ((double) 80         *       25)/100;
+            return ((double)number * percent) / 100;
+        }
     }
 }
