@@ -16,7 +16,7 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: '3.1.x'
-     - name: AddSource
+    - name: AddSource
       env: 
         WHO_TO_TRUST: ${{ secrets.EXTENSIONMINDERTRUST }} # EXTENSIONMINDERTRUST is a repo level secret containing a PAT with only read:packages access
       run: dotnet nuget add source --username ${{ github.repository_owner }} --password ${{ env.WHO_TO_TRUST }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/chrismckelt/ExtensionMinder/index.json"
