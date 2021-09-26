@@ -31,5 +31,5 @@ jobs:
     - name: Publish GitHub
       run: dotnet nuget push "ExtensionMinder/bin/Release/ExtensionMinder.*.nupkg"  --api-key ${{ secrets.GITHUB_TOKEN }} --source "github" --skip-duplicate #GITHUB_TOKEN has write:packages access by default, so we are good
     - name: Publish Nuget
-      run: dotnet nuget push *.nupkg --source https://api.nuget.org/v3/index.json --api-key ${{secrets.NUGETAPIKEY}} --source "nuget" --skip-duplicate
+      run: dotnet nuget push *.nupkg --source https://api.nuget.org/v3/index.json --api-key ${{secrets.NUGETAPIKEY}} --skip-duplicate
     
