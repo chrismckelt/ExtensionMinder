@@ -16,10 +16,6 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: '3.1.x'
-    - name: AddSource
-      env: 
-        WHO_TO_TRUST: ${{ secrets.REPLICONLIBREFRESOLVE }} # REPLICONLIBREFRESOLVE is a repo level secret containing a PAT with only read:packages access
-      run: dotnet nuget add source --username ${{ github.repository_owner }} --password ${{ env.WHO_TO_TRUST }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/chrismckelt/ExtensionMinder/index.json"
     - name: Build
       run: dotnet build
     - name: Test
@@ -27,4 +23,4 @@ jobs:
     - name: Package solution
       run: dotnet pack --configuration Release
     - name: Publish package
-      run: dotnet nuget push "ExtensionMinder/bin/Release/Schedule.*.nupkg"  --api-key ${{ secrets.GITHUB_TOKEN }} --source "github" --skip-duplicate #GITHUB_TOKEN has write:packages access by default, so we are good
+      run: dotnet nuget push "ExtensionMinder/bin/Release/ExtensionMinder.*.nupkg"  --api-key ${{ secrets.GITHUB_TOKEN }} --source "github" --skip-duplicate #GITHUB_TOKEN has write:packages access by default, so we are good
