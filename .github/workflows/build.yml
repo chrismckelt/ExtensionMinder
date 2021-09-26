@@ -19,7 +19,7 @@ jobs:
     - name: AddSource
       env: 
         WHO_TO_TRUST: ${{ secrets.EXTENSIONMINDERTRUST }} # EXTENSIONMINDERTRUST is a repo level secret containing a PAT with only read:packages access
-      run: dotnet nuget add source --username ${{ github.repository_owner }} --password ${{ env.WHO_TO_TRUST }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/chrismckelt/ExtensionMinder/index.json"
+      run: dotnet nuget add source --username ${{ github.repository_owner }} --password ${{ env.WHO_TO_TRUST }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/chrismckelt/index.json"
     - name: Build
       run: dotnet build --configuration Debug
     - name: Test
