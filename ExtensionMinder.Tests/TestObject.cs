@@ -8,7 +8,7 @@ namespace ExtensionMinder.Tests
         public string StringProperty { get; set; }
         public decimal DecimalProperty { get; set; }
 
-        public DateTime CreatedUtcDateTime { get; set; }
+        public System.DateTime CreatedUtcDateTime { get; set; }
 
         public static TestObject Build()
         {

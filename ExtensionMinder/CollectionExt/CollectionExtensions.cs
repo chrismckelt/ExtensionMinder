@@ -5,7 +5,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 
-namespace ExtensionMinder
+namespace ExtensionMinder.CollectionExt
 {
     public static class CollectionExtensions
     {
@@ -153,8 +153,8 @@ namespace ExtensionMinder
                     || n.PropertyType == typeof(byte)
                     || n.PropertyType == typeof(decimal)
                     || n.PropertyType == typeof(int)
-                    || n.PropertyType == typeof(DateTime)
-                    || n.PropertyType == typeof(DateTime?));
+                    || n.PropertyType == typeof(System.DateTime)
+                    || n.PropertyType == typeof(System.DateTime?));
             using (var sw = new StringWriter())
             {
                 var header = properties

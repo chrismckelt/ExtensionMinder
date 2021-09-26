@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using ExtensionMinder.CollectionExt;
 
-namespace ExtensionMinder
+namespace ExtensionMinder.StringExt
 {
     public static class SpellingExtensions
     {
@@ -12,11 +13,11 @@ namespace ExtensionMinder
         {
             switch (spellingVariants)
             {
-                case ExtensionMinder.SpellingVariants.None:
+                case StringExt.SpellingVariants.None:
                     return new[] { word };
-                case ExtensionMinder.SpellingVariants.One:
+                case StringExt.SpellingVariants.One:
                     return Edits(word);
-                case ExtensionMinder.SpellingVariants.Two:
+                case StringExt.SpellingVariants.Two:
                     return Edits(word).SelectMany(Edits).ToArray();
             }
             return null;

@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using ExtensionMinder.CollectionExt;
 using FizzWare.NBuilder;
 using Xunit;
- 
-namespace ExtensionMinder.Tests
+
+namespace ExtensionMinder.Tests.CollectionExt
 {
     public class CollectionExtensionsShould
     {

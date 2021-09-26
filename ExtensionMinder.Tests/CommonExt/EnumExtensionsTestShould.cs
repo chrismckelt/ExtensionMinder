@@ -1,8 +1,8 @@
-﻿
+﻿using ExtensionMinder.CommonExt;
 using FluentAssertions;
 using Xunit;
 
-namespace ExtensionMinder.Tests
+namespace ExtensionMinder.Tests.CommonExt
 {
     public class EnumExtensionsTestShould
     {

@@ -10,7 +10,7 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Web;
 
-namespace ExtensionMinder
+namespace ExtensionMinder.StringExt
 {
     /// <summary>
     ///     This class contain extension functions for string objects

@@ -1,4 +1,4 @@
-﻿namespace ExtensionMinder
+﻿namespace ExtensionMinder.SerializationExt
 {
   public static class XmlExtensions
   {

@@ -1,7 +1,7 @@
 using System;
 using System.IO;
 
-namespace ExtensionMinder
+namespace ExtensionMinder.SerializationExt
 {
     public static class StreamExtensions
     {
@@ -30,7 +30,7 @@ namespace ExtensionMinder
 
         file.Directory?.Create();
 
-        using (var fileStream = File.Create(filepath))
+        using (var fileStream = System.IO.File.Create(filepath))
         {
           stream.CopyTo(fileStream);
         }

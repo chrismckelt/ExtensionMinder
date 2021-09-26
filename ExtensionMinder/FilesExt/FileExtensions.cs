@@ -1,8 +1,7 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using System.Linq;
 
-namespace ExtensionMinder
+namespace ExtensionMinder.FilesExt
 {
     public static class FileExtensions
     {
@@ -57,7 +56,7 @@ namespace ExtensionMinder
         public static bool IsFileExtensionValid(this string fExt)
         {
             bool answer = true;
-            if (!String.IsNullOrWhiteSpace(fExt)
+            if (!System.String.IsNullOrWhiteSpace(fExt)
                 && fExt.Length > 1
                 && fExt[0] == '.')
             {

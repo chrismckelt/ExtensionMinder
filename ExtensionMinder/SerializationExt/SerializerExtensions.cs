@@ -8,7 +8,7 @@ using System.Xml;
 using System.Xml.Linq;
 using System.Xml.Serialization;
 
-namespace ExtensionMinder
+namespace ExtensionMinder.SerializationExt
 {
     public static class SerializerExtensions
     {

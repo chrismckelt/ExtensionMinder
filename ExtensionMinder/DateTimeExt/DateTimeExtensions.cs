@@ -1,36 +1,38 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using System.Text.RegularExpressions;
 
-namespace ExtensionMinder
+namespace ExtensionMinder.DateTimeExt
 {
     public static class DateTimeExtensions
     {
-        private static readonly DateTime Epoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+        private static readonly System.DateTime Epoch = new System.DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
 
-        public static DateTime FromUnixTimeToDateTimeUtc(this long secondsSinceEpoch)
+        public static System.DateTime FromUnixTimeToDateTimeUtc(this long secondsSinceEpoch)
         {
             return Epoch.AddSeconds(secondsSinceEpoch);
         }
 
-        public static long DateTimeUtcToUnixTime(this DateTime dateTime)
+        public static long DateTimeUtcToUnixTime(this System.DateTime dateTime)
         {
             return (long) (dateTime - Epoch).TotalSeconds;
         }
 
-        public static bool IsBetween(this DateTime input, DateTime start, DateTime end)
+        public static bool IsBetween(this System.DateTime input, System.DateTime start, System.DateTime end)
         {
             return input.IsBetween(start, end, true);
         }
 
-        public static bool IsBetween(this DateTime input, DateTime start, DateTime end, bool includeBoundaries)
+        public static bool IsBetween(this System.DateTime input, System.DateTime start, System.DateTime end, bool includeBoundaries)
         {
             return includeBoundaries
                 ? input >= start && input <= end
                 : input > start && input < end;
         }
 
-        public static string FormatFinancialYear(this DateTime date)
+        public static string FormatFinancialYear(this System.DateTime date)
         {
             // Financial year for date 30/6/2012 = string "2011/2012", 01/07/2012 = "2012/2013"
             var year1 = date.Year - (date.Month <= 6 ? 1 : 0);
@@ -38,39 +40,39 @@ namespace ExtensionMinder
             return $"{year1}/{year2}";
         }
 
-        public static DateTime GetFinancialYearStartDate(this DateTime date)
+        public static System.DateTime GetFinancialYearStartDate(this System.DateTime date)
         {
-            return new DateTime(date.Year - (date.Month <= 6 ? 1 : 0), 7, 01);
+            return new System.DateTime(date.Year - (date.Month <= 6 ? 1 : 0), 7, 01);
         }
 
-        public static DateTime GetFinancialYearEndDate(this DateTime date)
+        public static System.DateTime GetFinancialYearEndDate(this System.DateTime date)
         {
-            return new DateTime(date.Year + (date.Month <= 6 ? 0 : 1), 6, 30);
+            return new System.DateTime(date.Year + (date.Month <= 6 ? 0 : 1), 6, 30);
         }
 
-        public static DateTime EndOfDay(this DateTime date)
+        public static System.DateTime EndOfDay(this System.DateTime date)
         {
             return date.Date.AddDays(1).AddSeconds(-1);
         }
 
-        public static DateTime Min(DateTime t1, DateTime t2)
+        public static System.DateTime Min(System.DateTime t1, System.DateTime t2)
         {
-            if (DateTime.Compare(t1, t2) > 0) return t2;
+            if (System.DateTime.Compare(t1, t2) > 0) return t2;
             return t1;
         }
 
-        public static DateTime Max(DateTime t1, DateTime t2)
+        public static System.DateTime Max(System.DateTime t1, System.DateTime t2)
         {
-            if (DateTime.Compare(t1, t2) < 0) return t2;
+            if (System.DateTime.Compare(t1, t2) < 0) return t2;
             return t1;
         }
 
-        public static int CalculateAge(this DateTime dob)
+        public static int CalculateAge(this System.DateTime dob)
         {
-            return dob.CalculateAge(DateTime.Today);
+            return dob.CalculateAge(System.DateTime.Today);
         }
 
-        public static int CalculateAge(this DateTime dob, DateTime atDate)
+        public static int CalculateAge(this System.DateTime dob, System.DateTime atDate)
         {
             //Get difference in years
             var years = atDate.Date.Year - dob.Year;
@@ -83,17 +85,105 @@ namespace ExtensionMinder
         }
 
         /// <summary>
+        /// Adds the given number of business days to the <see cref="DateTime"/>.
+        /// </summary>
+        /// <param name="current">The date to be changed.</param>
+        /// <param name="days">Number of business days to be added.</param>
+        /// <returns>A <see cref="DateTime"/> increased by a given number of business days.</returns>
+        public static DateTime AddBusinessDays(this DateTime current, int days)
+        {
+            var sign = Math.Sign(days);
+            var unsignedDays = Math.Abs(days);
+            for (var i = 0; i < unsignedDays; i++)
+            {
+                do
+                {
+                    current = current.AddDays(sign);
+                }
+                while (current.DayOfWeek == DayOfWeek.Saturday ||
+                       current.DayOfWeek == DayOfWeek.Sunday);
+            }
+            return current;
+        }
+
+        public static int GetDaysFromLastMonday(this DateTime dt)
+        {
+            var day = dt.DayOfWeek.ToString();
+            switch (day)
+            {
+                case "Sunday": return -6;
+                case "Saturday": return -5;
+                case "Friday": return -4;
+                case "Thursday": return -3;
+                case "Wednesday": return -2;
+                case "Tuesday": return -1;
+                case "Monday": return -7;
+            }
+
+            return 0;
+        }
+
+        public static int WeekDaysInMonthCount(this DateTime dt)
+        {
+            var year = dt.Year;
+            var month = dt.Month;
+            int days = DateTime.DaysInMonth(year, month);
+            List<DateTime> dates = new List<DateTime>();
+            for (int i = 1; i <= days; i++)
+            {
+                dates.Add(new DateTime(year, month, i));
+            }
+
+            int weekDays = dates.Count(d => d.DayOfWeek > DayOfWeek.Sunday & d.DayOfWeek < DayOfWeek.Saturday);
+            return weekDays;
+        }
+
+        public static IEnumerable<DateTime> WeekDaysInMonthList(this DateTime dt)
+        {
+            var year = dt.Year;
+            var month = dt.Month;
+            int days = DateTime.DaysInMonth(year, month);
+            List<DateTime> dates = new List<DateTime>();
+            for (int i = 1; i <= days; i++)
+            {
+                var dt2 = new DateTime(year, month, i);
+                if (dt2.DayOfWeek != DayOfWeek.Saturday && dt.DayOfWeek != DayOfWeek.Sunday) yield return dt2;
+            }
+        }
+
+        /// <summary>
+        /// https://stackoverflow.com/questions/8561782/how-to-group-dates-by-week
+        /// </summary>
+        /// <param name="dt"></param>
+        /// <param name="startOfWeek"></param>
+        /// <returns></returns>
+        public static DateTime StartOfWeek(this DateTime dt, DayOfWeek startOfWeek)
+        {
+            int diff = dt.DayOfWeek - startOfWeek;
+            if (diff < 0)
+            {
+                diff += 7;
+            }
+            return dt.AddDays(-1 * diff).Date;
+        }
+
+        public static DateTime StartOfWeek(this DateTime? dt, DayOfWeek startOfWeek)
+        {
+            return StartOfWeek(dt.GetValueOrDefault(), startOfWeek);
+        }
+
+        /// <summary>
         ///     Relative formatting of DateTime (e.g. 2 hours ago, a month ago)
         /// </summary>
         /// <param name="source">Source (UTC format)</param>
         /// <param name="defaultFormat">Default format string (in case relative formatting is not applied)</param>
         /// <returns>Formatted date and time string</returns>
-        public static string RelativeFormat(this DateTime source, string defaultFormat)
+        public static string RelativeFormat(this System.DateTime source, string defaultFormat)
         {
             string result;
 
             //TODO localize hard-coded strings
-            var ts = new TimeSpan(DateTime.UtcNow.Ticks - source.Ticks);
+            var ts = new TimeSpan(System.DateTime.UtcNow.Ticks - source.Ticks);
             var delta = ts.TotalSeconds;
 
             if (delta > 0)
@@ -131,12 +221,12 @@ namespace ExtensionMinder
                 }
                 else if (delta < 31104000) // 12 (months) * 30 (days) * 24 (hours) * 60 (minutes) * 60 (seconds)
                 {
-                    var months = Convert.ToInt32(Math.Floor((double) ts.Days / 30));
+                    var months = Convert.ToInt32(System.Math.Floor((double) ts.Days / 30));
                     result = months <= 1 ? "one month ago" : months + " months ago";
                 }
                 else
                 {
-                    var years = Convert.ToInt32(Math.Floor((double) ts.Days / 365));
+                    var years = Convert.ToInt32(System.Math.Floor((double) ts.Days / 365));
                     result = years <= 1 ? "one year ago" : years + " years ago";
                 }
             }
@@ -154,10 +244,10 @@ namespace ExtensionMinder
             return result;
         }
 
-        public static DateTime? ToAustralianDate(this string date,
+        public static System.DateTime? ToAustralianDate(this string date,
             DateTimeExtensions.DateTimeFormat from = DateTimeExtensions.DateTimeFormat.UkDate)
         {
-            DateTime dt;
+            System.DateTime dt;
             if (date.TryParseDateTime(from,out dt)) return dt;
 
             return Convert.ToDateTime(date, DateTimeFormatInfo.CurrentInfo);
@@ -168,13 +258,29 @@ namespace ExtensionMinder
         /// </summary>
         /// <param name="dateTime">date-time</param>
         /// <returns>seconds</returns>
-        public static uint GetSecondsSinceUnixEpoch(this DateTime dateTime)
+        public static uint GetSecondsSinceUnixEpoch(this System.DateTime dateTime)
         {
-            var t = dateTime - new DateTime(1970, 1, 1);
+            var t = dateTime - new System.DateTime(1970, 1, 1);
             var ss = (int) t.TotalSeconds;
             if (ss < 0)
                 return 0;
             return (uint) ss;
+        }
+
+        public static System.DateTime AddWorkDays(this System.DateTime date, int workingDays)
+        {
+            int direction = workingDays < 0 ? -1 : 1;
+            System.DateTime newDate = date;
+            while (workingDays != 0)
+            {
+                newDate = newDate.AddDays(direction);
+                if (newDate.DayOfWeek != DayOfWeek.Saturday &&
+                    newDate.DayOfWeek != DayOfWeek.Sunday)
+                {
+                    workingDays -= direction;
+                }
+            }
+            return newDate;
         }
 
 
@@ -208,7 +314,7 @@ namespace ExtensionMinder
             /// <summary>
             ///     DateTime found in the string
             /// </summary>
-            public readonly DateTime DateTime;
+            public readonly System.DateTime DateTime;
 
             /// <summary>
             ///     True if a date was found within the string
@@ -233,10 +339,10 @@ namespace ExtensionMinder
             /// <summary>
             ///     Utc gotten from DateTime if IsUtcOffsetFound is True
             /// </summary>
-            public DateTime UtcDateTime;
+            public System.DateTime UtcDateTime;
 
             internal ParsedDateTime(int indexOfDate, int lengthOfDate, int indexOfTime, int lengthOfTime,
-                DateTime dateTime)
+                System.DateTime dateTime)
             {
                 IndexOfDate = indexOfDate;
                 LengthOfDate = lengthOfDate;
@@ -247,11 +353,11 @@ namespace ExtensionMinder
                 IsTimeFound = indexOfTime > -1;
                 UtcOffset = new TimeSpan(25, 0, 0);
                 IsUtcOffsetFound = false;
-                UtcDateTime = new DateTime(1, 1, 1);
+                UtcDateTime = new System.DateTime(1, 1, 1);
             }
 
             internal ParsedDateTime(int indexOfDate, int lengthOfDate, int indexOfTime, int lengthOfTime,
-                DateTime dateTime, TimeSpan utcOffset)
+                System.DateTime dateTime, TimeSpan utcOffset)
             {
                 IndexOfDate = indexOfDate;
                 LengthOfDate = lengthOfDate;
@@ -261,10 +367,10 @@ namespace ExtensionMinder
                 IsDateFound = indexOfDate > -1;
                 IsTimeFound = indexOfTime > -1;
                 UtcOffset = utcOffset;
-                IsUtcOffsetFound = Math.Abs(utcOffset.TotalHours) < 12;
+                IsUtcOffsetFound = System.Math.Abs(utcOffset.TotalHours) < 12;
                 if (!IsUtcOffsetFound)
                 {
-                    UtcDateTime = new DateTime(1, 1, 1);
+                    UtcDateTime = new System.DateTime(1, 1, 1);
                 }
                 else
                 {
@@ -272,9 +378,9 @@ namespace ExtensionMinder
                     {
                         var ts = dateTime.TimeOfDay + utcOffset;
                         if (ts < new TimeSpan(0))
-                            UtcDateTime = new DateTime(1, 1, 2) + ts;
+                            UtcDateTime = new System.DateTime(1, 1, 2) + ts;
                         else
-                            UtcDateTime = new DateTime(1, 1, 1) + ts;
+                            UtcDateTime = new System.DateTime(1, 1, 1) + ts;
                     }
                     else
                     {
@@ -290,7 +396,7 @@ namespace ExtensionMinder
         ///     - no year was found by TryParseDate();
         ///     It is ignored if DefaultDateIsNow = true was set after DefaultDate
         /// </summary>
-        public static DateTime DefaultDate
+        public static System.DateTime DefaultDate
         {
             set
             {
@@ -300,12 +406,12 @@ namespace ExtensionMinder
             get
             {
                 if (DefaultDateIsNow)
-                    return DateTime.Now;
+                    return System.DateTime.Now;
                 return _defaultDate;
             }
         }
 
-        private static DateTime _defaultDate = DateTime.Now;
+        private static System.DateTime _defaultDate = System.DateTime.Now;
 
         /// <summary>
         ///     If true then DefaultDate property is ignored and DefaultDate is always DateTime.Now
@@ -344,11 +450,11 @@ namespace ExtensionMinder
         /// <param name="defaultFormat">format to be used preferably in ambivalent instances</param>
         /// <param name="dateTime">parsed date-time output</param>
         /// <returns>true if both date and time were found, else false</returns>
-        public static bool TryParseDateTime(this string str, DateTimeFormat defaultFormat, out DateTime dateTime)
+        public static bool TryParseDateTime(this string str, DateTimeFormat defaultFormat, out System.DateTime dateTime)
         {
             if (!TryParseDateTime(str, defaultFormat, out ParsedDateTime parsedDateTime))
             {
-                dateTime = new DateTime(1, 1, 1);
+                dateTime = new System.DateTime(1, 1, 1);
                 return false;
             }
 
@@ -365,11 +471,11 @@ namespace ExtensionMinder
         /// <param name="defaultFormat">format to be used preferably in ambivalent instances</param>
         /// <param name="dateTime">parsed date-time output</param>
         /// <returns>true if date and/or time was found, else false</returns>
-        public static bool TryParseDateOrTime(this string str, DateTimeFormat defaultFormat, out DateTime dateTime)
+        public static bool TryParseDateOrTime(this string str, DateTimeFormat defaultFormat, out System.DateTime dateTime)
         {
             if (!TryParseDateOrTime(str, defaultFormat, out ParsedDateTime parsedDateTime))
             {
-                dateTime = new DateTime(1, 1, 1);
+                dateTime = new System.DateTime(1, 1, 1);
                 return false;
             }
 
@@ -385,11 +491,11 @@ namespace ExtensionMinder
         /// <param name="defaultFormat">format to be used preferably in ambivalent instances</param>
         /// <param name="time">parsed time output</param>
         /// <returns>true if time was found, else false</returns>
-        public static bool TryParseTime(this string str, DateTimeFormat defaultFormat, out DateTime time)
+        public static bool TryParseTime(this string str, DateTimeFormat defaultFormat, out System.DateTime time)
         {
             if (!TryParseTime(str, defaultFormat, out var parsedTime, null))
             {
-                time = new DateTime(1, 1, 1);
+                time = new System.DateTime(1, 1, 1);
                 return false;
             }
 
@@ -406,11 +512,11 @@ namespace ExtensionMinder
         /// <param name="defaultFormat">format to be used preferably in ambivalent instances</param>
         /// <param name="date">parsed date output</param>
         /// <returns>true if date was found, else false</returns>
-        public static bool TryParseDate(this string str, DateTimeFormat defaultFormat, out DateTime date)
+        public static bool TryParseDate(this string str, DateTimeFormat defaultFormat, out System.DateTime date)
         {
             if (!TryParseDate(str, defaultFormat, out ParsedDateTime parsedDate))
             {
-                date = new DateTime(1, 1, 1);
+                date = new System.DateTime(1, 1, 1);
                 return false;
             }
 
@@ -475,7 +581,7 @@ namespace ExtensionMinder
                 if (!TryParseTime(str, defaultFormat, out parsedTime, null))
                     return false;
 
-                var dateTime = new DateTime(DefaultDate.Year, DefaultDate.Month, DefaultDate.Day,
+                var dateTime = new System.DateTime(DefaultDate.Year, DefaultDate.Month, DefaultDate.Day,
                     parsedTime.DateTime.Hour,
                     parsedTime.DateTime.Minute, parsedTime.DateTime.Second);
                 parsedDateTime = new ParsedDateTime(-1, -1, parsedTime.IndexOfTime, parsedTime.LengthOfTime,
@@ -486,7 +592,7 @@ namespace ExtensionMinder
             {
                 if (!TryParseTime(str, defaultFormat, out parsedTime, parsedDate))
                 {
-                    var dateTime = new DateTime(parsedDate.DateTime.Year, parsedDate.DateTime.Month,
+                    var dateTime = new System.DateTime(parsedDate.DateTime.Year, parsedDate.DateTime.Month,
                         parsedDate.DateTime.Day,
                         0, 0, 0);
                     parsedDateTime =
@@ -494,7 +600,7 @@ namespace ExtensionMinder
                 }
                 else
                 {
-                    var dateTime = new DateTime(parsedDate.DateTime.Year, parsedDate.DateTime.Month,
+                    var dateTime = new System.DateTime(parsedDate.DateTime.Year, parsedDate.DateTime.Month,
                         parsedDate.DateTime.Day,
                         parsedTime.DateTime.Hour, parsedTime.DateTime.Minute, parsedTime.DateTime.Second);
                     parsedDateTime = new ParsedDateTime(parsedDate.IndexOfDate, parsedDate.LengthOfDate,
@@ -594,7 +700,7 @@ namespace ExtensionMinder
                      hour == 12)
                 hour -= 12;
 
-            var dateTime = new DateTime(1, 1, 1, hour, minute, second);
+            var dateTime = new System.DateTime(1, 1, 1, hour, minute, second);
 
             if (m.Groups["offset_hh"].Success)
             {
@@ -663,7 +769,7 @@ namespace ExtensionMinder
                 RegexOptions.Compiled | RegexOptions.IgnoreCase);
             if (m.Success)
             {
-                DateTime date;
+                System.DateTime date;
                 if ((defaultFormat ^ DateTimeFormat.UsaDate) == DateTimeFormat.UsaDate)
                 {
                     if (!ConvertToDate(int.Parse(m.Groups["year"].Value), int.Parse(m.Groups["day"].Value),
@@ -687,7 +793,7 @@ namespace ExtensionMinder
                 RegexOptions.Compiled | RegexOptions.IgnoreCase);
             if (m.Success)
             {
-                DateTime date;
+                System.DateTime date;
                 if (!ConvertToDate(int.Parse(m.Groups["year"].Value), int.Parse(m.Groups["month"].Value),
                     int.Parse(m.Groups["day"].Value), out date))
                     return false;
@@ -787,13 +893,13 @@ namespace ExtensionMinder
             return false;
         }
 
-        public static bool ConvertToDate(int year, int month, int day, out DateTime date)
+        public static bool ConvertToDate(int year, int month, int day, out System.DateTime date)
         {
             if (year >= 100)
             {
                 if (year < 1000)
                 {
-                    date = new DateTime(1, 1, 1);
+                    date = new System.DateTime(1, 1, 1);
                     return false;
                 }
             }
@@ -808,11 +914,11 @@ namespace ExtensionMinder
 
             try
             {
-                date = new DateTime(year, month, day);
+                date = new System.DateTime(year, month, day);
             }
             catch
             {
-                date = new DateTime(1, 1, 1);
+                date = new System.DateTime(1, 1, 1);
                 return false;
             }
 

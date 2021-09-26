@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace ExtensionMinder
+namespace ExtensionMinder.CollectionExt
 {
   public static class SetExtensions
   {

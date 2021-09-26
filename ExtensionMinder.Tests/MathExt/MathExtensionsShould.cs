@@ -1,8 +1,8 @@
-﻿
+﻿using ExtensionMinder.MathExt;
 using FluentAssertions;
 using Xunit;
 
-namespace ExtensionMinder.Tests
+namespace ExtensionMinder.Tests.MathExt
 {
     public class MathExtensionsShould
     {

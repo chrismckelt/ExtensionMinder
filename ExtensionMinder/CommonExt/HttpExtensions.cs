@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Web;
 
-namespace ExtensionMinder
+namespace ExtensionMinder.CommonExt
 {
     public static class HttpExtensions
     {

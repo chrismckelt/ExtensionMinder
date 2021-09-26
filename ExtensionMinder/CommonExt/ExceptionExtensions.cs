@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.ExceptionServices;
 
-namespace ExtensionMinder
+namespace ExtensionMinder.CommonExt
 {
     public static class ExceptionExtensions
     {

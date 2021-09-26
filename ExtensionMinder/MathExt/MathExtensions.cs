@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ExtensionMinder
+namespace ExtensionMinder.MathExt
 {
     public static class MathExtensions
     {
@@ -27,13 +27,13 @@ namespace ExtensionMinder
 
         public static decimal ToCeiling(this decimal d)
         {
-            return Math.Ceiling(d);
+            return System.Math.Ceiling(d);
         }
 
         public static decimal RoundUp(this decimal d, int dp)
         {
-            var multiplier = Convert.ToDecimal(Math.Pow(10, dp));
-            return Math.Ceiling(d*multiplier)/multiplier;
+            var multiplier = Convert.ToDecimal(System.Math.Pow(10, dp));
+            return System.Math.Ceiling(d*multiplier)/multiplier;
         }
 
         public static double RoundUp(this double d, int dp)
@@ -44,8 +44,8 @@ namespace ExtensionMinder
 
         public static decimal TruncateDecimal(this decimal d, int dp)
         {
-            var multiplier = Convert.ToDecimal(Math.Pow(10, dp));
-            return Math.Truncate(d*multiplier)/multiplier;
+            var multiplier = Convert.ToDecimal(System.Math.Pow(10, dp));
+            return System.Math.Truncate(d*multiplier)/multiplier;
         }
 
         public static bool IsBetween(this int x, int lower, int upper, bool includeBoundaries = true)
@@ -72,7 +72,7 @@ namespace ExtensionMinder
 
         public static bool IsInIncrementOf(this decimal x, decimal increment)
         {
-            return Math.Floor(x/increment) == x/increment;
+            return System.Math.Floor(x/increment) == x/increment;
         }
 
         public static int GetCents(this decimal x)
@@ -82,22 +82,22 @@ namespace ExtensionMinder
 
         public static int GetCents(this decimal x, int places)
         {
-            return (int) (Convert.ToDouble(x - Decimal.Truncate(x))*(Math.Pow(10, places)));
+            return (int) (Convert.ToDouble(x - Decimal.Truncate(x))*(System.Math.Pow(10, places)));
         }
 
         public static int RoundDownToNearest(this decimal x, int number)
         {
-           return (int) Math.Floor(x/number)*number;
+           return (int) System.Math.Floor(x/number)*number;
         }
 
         public static int RoundUpToNearest(this decimal x, int number)
         {
-            return (int) Math.Ceiling(x / number) * number;
+            return (int) System.Math.Ceiling(x / number) * number;
         }
 
         public static int ButNotLessThen(this int x, int number)
         {
-            return Math.Max(x, number);
+            return System.Math.Max(x, number);
         }
 
         public static decimal Add(this decimal x, decimal number)

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 
-namespace ExtensionMinder
+namespace ExtensionMinder.ReflectionExt
 {
   public static class ReflectionExtensions
   {

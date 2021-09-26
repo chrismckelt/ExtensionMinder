@@ -5,7 +5,7 @@ using System.Globalization;
 using System.Linq;
 using System.Xml.Serialization;
 
-namespace ExtensionMinder
+namespace ExtensionMinder.CommonExt
 {
     public static class EnumExtensions
     {

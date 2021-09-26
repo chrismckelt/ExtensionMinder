@@ -1,31 +1,32 @@
 ﻿using System;
+using ExtensionMinder.DateTimeExt;
 using FluentAssertions;
 using Xunit;
 
-namespace ExtensionMinder.Tests
+namespace ExtensionMinder.Tests.DateTimeExt
 {
     public class DateTimeExtensionsShould
     {
         [Fact]
-        public void DateTimeIsBetweenReturnsTrueForValidCase()
+        public void DateTime_IsBetween_Returns_True_For_Valid_Case()
         {
             var start = new DateTime(2000, 01, 01);
             var end = new DateTime(2010, 01, 01);
             var between = new DateTime(2005, 01, 01);
 
-            var result = between.IsBetween(start, end);
+            var result = DateTimeExtensions.IsBetween(between, start, end);
 
             result.Should().Be(true);
         }
 
         [Fact]
-        public void DateTimeIsBetweenReturnsFalseForValidCase()
+        public void DateTime_Is_Between_Returns_False_For_Valid_Case()
         {
             var start = new DateTime(2000, 01, 01);
             var end = new DateTime(2010, 01, 01);
             var between = new DateTime(2012, 01, 01);
 
-            var result = between.IsBetween(start, end);
+            var result = DateTimeExtensions.IsBetween(between, start, end);
 
             result.Should().Be(false);
         }
@@ -37,28 +38,28 @@ namespace ExtensionMinder.Tests
             var end = new DateTime(2010, 01, 01);
             var between = new DateTime(2010, 01, 01);
 
-            var result = between.IsBetween(start, end, true);
+            var result = DateTimeExtensions.IsBetween(between, start, end, true);
 
             result.Should().Be(true);
         }
 
         [Fact]
-        public void DateTimeIsBetweenReturnsFalseForEdgeCase()
+        public void DateTime_Is_Between_Returns_False_For_Edge_Case()
         {
             var start = new DateTime(2000, 01, 01);
             var end = new DateTime(2010, 01, 01);
             var between = new DateTime(2010, 01, 01);
 
-            var result = between.IsBetween(start, end, false);
+            var result = DateTimeExtensions.IsBetween(between, start, end, false);
 
             result.Should().Be(false);
         }
 
         [Fact]
-        public void GetFinancialYearStartDateGetsCorrectYearInJanToJune()
+        public void Financial_Year_Start_Date_Gets_Correct_Year_In_Jan_To_June()
         {
             var date = new DateTime(2010, 01, 01);
-            var start = date.GetFinancialYearStartDate();
+            var start = DateTimeExtensions.GetFinancialYearStartDate(date);
             start.Year.Should().Be(2009);
             start.Month.Should().Be(7);
             start.Day.Should().Be(1);
@@ -68,7 +69,7 @@ namespace ExtensionMinder.Tests
         public void GetFinancialYearStartYearGetsCorrectYearInJulyToDec()
         {
             var date = new DateTime(2010, 11, 01);
-            var end = date.GetFinancialYearStartDate();
+            var end = DateTimeExtensions.GetFinancialYearStartDate(date);
             end.Year.Should().Be(2010);
             end.Month.Should().Be(7);
             end.Day.Should().Be(1);
@@ -79,7 +80,7 @@ namespace ExtensionMinder.Tests
         {
             var date = new DateTime(2010, 10, 10, 10, 10, 10);
             var endOfDay = new DateTime(2010, 10, 10, 23, 59, 59);
-            var result = date.EndOfDay();
+            var result = DateTimeExtensions.EndOfDay(date);
             result.Should().Be(endOfDay);
         }
 
@@ -87,15 +88,15 @@ namespace ExtensionMinder.Tests
         public void CalculateAgeCalculatesAgeCorrectlyWithDobLaterInYear()
         {
             var dob = DateTime.Now.AddDays(1).AddYears(-10);
-            var age = dob.CalculateAge();
+            var age = DateTimeExtensions.CalculateAge(dob);
             age.Should().Be(9);
         }
 
         [Fact]
-        public void CalculateAgeCalculatesAgeCorrectlyWithDobEarlierInYear()
+        public void CalculateAge_correct_for_dob_early_in_year()
         {
             var dob = DateTime.Now.AddDays(-1).AddYears(-10);
-            var age = dob.CalculateAge();
+            var age = DateTimeExtensions.CalculateAge(dob);
             age.Should().Be(10);
         }
     }
