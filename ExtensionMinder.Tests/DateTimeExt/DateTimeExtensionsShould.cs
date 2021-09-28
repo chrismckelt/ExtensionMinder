@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq;
+using System.Threading.Tasks;
 using ExtensionMinder.DateTimeExt;
 using FluentAssertions;
 using Xunit;
@@ -98,6 +100,23 @@ namespace ExtensionMinder.Tests.DateTimeExt
             var dob = DateTime.Now.AddDays(-1).AddYears(-10);
             var age = DateTimeExtensions.CalculateAge(dob);
             age.Should().Be(10);
+        }
+
+        [Fact]
+        public void WeekDaysInMonthCount_correct()
+        {
+
+            var dt = DateTime.Parse("9/9/2021");
+            var days = DateTimeExtensions.WeekDaysInMonthCount(dt);
+            days.Should().Be(22);
+        }
+
+        [Fact]
+        public void WeekDaysInMonthList_correct()
+        {
+            var dt = DateTime.Parse("9/9/2021");
+            var days = DateTimeExtensions.WeekDaysInMonthList(dt);
+            days.Count().Should().Be(22);
         }
     }
 }

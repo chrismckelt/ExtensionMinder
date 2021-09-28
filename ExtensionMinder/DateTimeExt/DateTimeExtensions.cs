@@ -143,12 +143,13 @@ namespace ExtensionMinder.DateTimeExt
             var year = dt.Year;
             var month = dt.Month;
             int days = DateTime.DaysInMonth(year, month);
-            List<DateTime> dates = new List<DateTime>();
+
             for (int i = 1; i <= days; i++)
             {
                 var dt2 = new DateTime(year, month, i);
-                if (dt2.DayOfWeek != DayOfWeek.Saturday && dt.DayOfWeek != DayOfWeek.Sunday) yield return dt2;
+                if (dt2.DayOfWeek != DayOfWeek.Saturday && dt2.DayOfWeek != DayOfWeek.Sunday) yield return dt;
             }
+
         }
 
         /// <summary>
