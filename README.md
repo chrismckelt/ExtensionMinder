@@ -1,7 +1,8 @@
 #  ExtensionMinder
 
-### A categorised set of extension methods collected over many years
+![build](https://github.com/chrismckelt/extensionminder/actions/workflows/build.yml/badge.svg)
 
+### A categorised set of extension methods collected over many years
 
 ## Tests
 
