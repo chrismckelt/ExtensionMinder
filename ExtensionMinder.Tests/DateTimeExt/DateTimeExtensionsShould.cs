@@ -118,5 +118,14 @@ namespace ExtensionMinder.Tests.DateTimeExt
             var days = DateTimeExtensions.WeekDaysInMonthList(dt);
             days.Count().Should().Be(22);
         }
+
+        [Fact]
+        public void BusinessDaysBetween()
+        {
+            var start = DateTime.Parse("24/9/2022");
+            var end = DateTime.Parse("30/9/2022");
+            var days = start.BusinessDaysBetween(end);
+            days.Should().Be(5);
+        }
     }
 }
