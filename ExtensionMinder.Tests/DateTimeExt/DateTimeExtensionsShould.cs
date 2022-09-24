@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Globalization;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using ExtensionMinder.DateTimeExt;
 using FluentAssertions;
@@ -117,6 +119,16 @@ namespace ExtensionMinder.Tests.DateTimeExt
             var dt = DateTime.Parse("9/9/2021");
             var days = DateTimeExtensions.WeekDaysInMonthList(dt);
             days.Count().Should().Be(22);
+        }
+
+        [Fact]
+        public void BusinessDaysBetween()
+        {
+            Thread.CurrentThread.CurrentCulture = new CultureInfo("en-AU");
+            var start = DateTime.Parse("24/9/2022");
+            var end = DateTime.Parse("30/9/2022");
+            var days = start.BusinessDaysBetween(end);
+            days.Should().Be(5);
         }
     }
 }
