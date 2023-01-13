@@ -28,8 +28,8 @@ jobs:
       run: dotnet build --configuration Release
     - name: Package solution
       run: dotnet pack --configuration Release
-    - name: Publish GitHub
-      run: dotnet nuget push "ExtensionMinder/bin/Release/ExtensionMinder.*.nupkg"  --api-key ${{ secrets.GITHUB_TOKEN }} --source "github" --skip-duplicate #GITHUB_TOKEN has write:packages access by default, so we are good
-    - name: Publish Nuget
-      run: dotnet nuget push "ExtensionMinder/bin/Release/ExtensionMinder.*.nupkg" --source https://api.nuget.org/v3/index.json --api-key ${{secrets.NUGETAPIKEY}} --skip-duplicate
+ #   - name: Publish GitHub
+ #     run: dotnet nuget push "ExtensionMinder/bin/Release/ExtensionMinder.*.nupkg"  --api-key ${{ secrets.GITHUB_TOKEN }} --source "github" --skip-duplicate #GITHUB_TOKEN has write:packages access by default, so we are good
+ #   - name: Publish Nuget
+ #     run: dotnet nuget push "ExtensionMinder/bin/Release/ExtensionMinder.*.nupkg" --source https://api.nuget.org/v3/index.json --api-key ${{secrets.NUGETAPIKEY}} --skip-duplicate
     
